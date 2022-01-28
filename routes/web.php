@@ -21,5 +21,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
-Route::get('/','Site/LandingPageController@index')->name('landing_page');
+Route::get('/','Site\LandingPageController@index')->name('landing_page');
 // Route::get('/home', 'HomeController@index')->name('home');
