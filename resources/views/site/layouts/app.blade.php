@@ -83,7 +83,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container -->
 </nav>
-<div class="main" style="background-image: url('{{asset($public_folder.'sites/images/Rent.png')}}'">
+<div class="main" style="background-image: url('{{asset($public_folder.'/sites/images/Rent.png')}}'">
 
 <!--    Change the image source '/images/default.jpg' with your favourite image.     -->
     
