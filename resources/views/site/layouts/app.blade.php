@@ -9,8 +9,8 @@
     
     <title>الساورة للعقارات</title>
     
-    <link href="{{url('/sites/css/bootstrap.css')}}" rel="stylesheet" />
-	<link href="{{url('/sites/css/coming-sssoon.css')}}" rel="stylesheet" />    
+    <link href="{{url('public/sites/css/bootstrap.css')}}" rel="stylesheet" />
+	<link href="{{url('public/sites/css/coming-sssoon.css')}}" rel="stylesheet" />    
     
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -36,22 +36,22 @@
       <ul class="nav navbar-nav">
          <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                <img src="{{url('sites/images/flags/US.png')}}"/>
+                <img src="{{url('public/sites/images/flags/US.png')}}"/>
                 English(US) 
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#"><img src="{{url('sites/images/flags/DE.png')}}"/> Deutsch</a></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/GB.png')}}"/> English(UK)</a></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/FR.png')}}"/> Français</a></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/RO.png')}}"/> Română</a></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/IT.png')}}"/> Italiano</a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/DE.png')}}"/> Deutsch</a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/GB.png')}}"/> English(UK)</a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/FR.png')}}"/> Français</a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/RO.png')}}"/> Română</a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/IT.png')}}"/> Italiano</a></li>
                 
                 <li class="divider"></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/ES.png')}}"/> Español <span class="label label-default">soon</span></a></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/BR.png')}}"/> Português <span class="label label-default">soon</span></a></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/JP.png')}}"/> 日本語 <span class="label label-default">soon</span></a></li>
-                <li><a href="#"><img src="{{url('sites/images/flags/TR.png')}}"/> Türkçe <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/ES.png')}}"/> Español <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/BR.png')}}"/> Português <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/JP.png')}}"/> 日本語 <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url('public/sites/images/flags/TR.png')}}"/> Türkçe <span class="label label-default">soon</span></a></li>
              
               </ul>
         </li>
@@ -97,7 +97,7 @@
     </div>
  </div>
  </body>
-   <script src="{{url('sites/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
-   <script src="{{url('sites/js/bootstrap.min.js')}}" type="text/javascript"></script>
+   <script src="{{url('public/sites/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
+   <script src="{{url('public/sites/js/bootstrap.min.js')}}" type="text/javascript"></script>
 
 </html>
