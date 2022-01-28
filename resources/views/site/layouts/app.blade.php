@@ -9,9 +9,11 @@
     
     <title>الساورة للعقارات</title>
     
+  <link href="{{ asset('public/sites/css/bootstrap.css') }}" rel="stylesheet" />
+	<link href="{{ asset('public/sites/css/coming-sssoon.css') }}" rel="stylesheet" />    
+
   <link href="{{ asset('sites/css/bootstrap.css') }}" rel="stylesheet" />
-	<link href="{{ asset('sites/css/coming-sssoon.css') }}" rel="stylesheet" />    
-    
+	<link href="{{ asset('sites/css/coming-sssoon.css') }}" rel="stylesheet" />
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
