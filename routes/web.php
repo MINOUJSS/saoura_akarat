@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('site.index.index');
-});
+// Route::get('/', function () {
+//     return view('site.index.index');
+// });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/','Site/LandingPageController@index')->name('landing_page');
+// Route::get('/home', 'HomeController@index')->name('home');
