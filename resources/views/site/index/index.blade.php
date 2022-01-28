@@ -1,10 +1,15 @@
 @extends('site.layouts.app')
 
 @section('content')
+@php
+    $public_folder='public';
+@endphp
 <div class="container">
     <h1 class="logo cursive">
-        Sssoon
+        <img src="{{asset($public_folder.'sites/images/logo.png')}}">
+        {{-- Sssoon --}}
     </h1>
+    
 <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
     
     <div class="content">

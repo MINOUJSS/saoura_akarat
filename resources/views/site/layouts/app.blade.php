@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width" />
     
     <title>الساورة للعقارات</title>
-    
-  <link href="{{ asset('public/sites/css/bootstrap.css') }}" rel="stylesheet" />
-	<link href="{{ asset('public/sites/css/coming-sssoon.css') }}" rel="stylesheet" />    
+   @php
+       $public_folder='public';
+   @endphp 
+  <link href="{{ asset($public_folder.'/sites/css/bootstrap.css') }}" rel="stylesheet" />
+	<link href="{{ asset($public_folder.'sites/css/coming-sssoon.css') }}" rel="stylesheet" />    
 
-  <link href="{{ asset('sites/css/bootstrap.css') }}" rel="stylesheet" />
-	<link href="{{ asset('sites/css/coming-sssoon.css') }}" rel="stylesheet" />
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
@@ -38,22 +38,22 @@
       <ul class="nav navbar-nav">
          <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                <img src="{{url('sites')}}/images/flags/US.png"/>
+                <img src="{{url($public_folder.'sites/images/flags/US.png')}}"/>
                 English(US) 
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/DE.png"/> Deutsch</a></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/GB.png"/> English(UK)</a></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/FR.png"/> Français</a></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/RO.png"/> Română</a></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/IT.png"/> Italiano</a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/DE.png')}}"/> Deutsch</a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/GB.png')}}"/> English(UK)</a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/FR.png')}}"/> Français</a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/RO.png')}}"/> Română</a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/IT.png')}}"/> Italiano</a></li>
                 
                 <li class="divider"></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/ES.png"/> Español <span class="label label-default">soon</span></a></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/BR.png"/> Português <span class="label label-default">soon</span></a></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/JP.png"/> 日本語 <span class="label label-default">soon</span></a></li>
-                <li><a href="#"><img src="{{url('sites')}}/images/flags/TR.png"/> Türkçe <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/ES.png')}}"/> Español <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/BR.png')}}"/> Português <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/JP.png')}}"/> 日本語 <span class="label label-default">soon</span></a></li>
+                <li><a href="#"><img src="{{url($public_folder.'sites/images/flags/TR.png')}}"/> Türkçe <span class="label label-default">soon</span></a></li>
              
               </ul>
         </li>
@@ -83,7 +83,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container -->
 </nav>
-<div class="main" style="background-image: url('{{url('sites')}}/images/Rent.png')">
+<div class="main" style="background-image: url('{{asset($public_folder.'sites/images/Rent.png')}}'">
 
 <!--    Change the image source '/images/default.jpg' with your favourite image.     -->
     
@@ -99,7 +99,7 @@
     </div>
  </div>
  </body>
-   <script src="{{url('public')}}/sites/js/jquery-1.10.2.js" type="text/javascript"></script>
-   <script src="{{url('public')}}/sites/js/bootstrap.min.js" type="text/javascript"></script>
+   <script src="{{asset($public_folder.'/sites/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
+   <script src="{{asset($public_folder.'sites/js/bootstrap.min.js')}}" type="text/javascript"></script>
 
 </html>
