@@ -6,7 +6,7 @@
 @endphp
 <div class="container">
     <h1 class="logo cursive">
-        <img src="{{asset($public_folder.'sites/images/logo.png')}}">
+        <img src="{{asset($public_folder.'/sites/images/logo.png')}}">
         {{-- Sssoon --}}
     </h1>
     
