@@ -748,11 +748,11 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     min-height: 140px;
 }
 .main .motto, .main .subscribe .info-text{
-    font-size: 28px;
+    font-size: 40px;
     color: #FFFFFF;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
     text-align: center;
-    margin-top: 50px;
+    margin-top: 0px;
     
 }
 .main .subscribe .info-text{
