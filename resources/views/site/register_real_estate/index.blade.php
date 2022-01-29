@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="container">
-    <h1 class="logo cursive">
+    {{-- <h1 class="logo cursive">
         <img src="{{asset(get_public_folder().'/sites/images/logo.png')}}">
-        {{-- Sssoon --}}
-    </h1>
+        
+    </h1> --}}
     
 <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
   

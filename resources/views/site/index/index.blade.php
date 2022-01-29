@@ -10,7 +10,7 @@
 <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
   
     <div class="content">
-        <h4 class="motto">تتولى عنكم عناء البحث <br/> و تختصر لكم المسافات.</h4>
+        <h4 class="motto">الساورة للعقارات تتولى عنكم عناء البحث <br/> و تختصر لكم المسافات.</h4>
         <div class="subscribe">
             <h5 class="info-text">
                 Join the waiting list for the beta. We keep you posted. 
@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4 col-sm6-6 col-sm-offset-3 ">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-danger btn-fill">تسجيل عقار</button>
-                      <button type="submit" class="btn btn-success btn-fill">أبحث عن عقار</button>
+                        <a href="{{route('site-register-real-estate')}}"><button type="submit" class="btn btn-danger btn-fill">تسجيل عقار</button></a>
+                      <a href="{{route('site-register-real-estate-customer')}}"><button type="submit" class="btn btn-success btn-fill">أبحث عن عقار</button></a>
                     </div>
                       
                     
