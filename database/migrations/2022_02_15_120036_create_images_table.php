@@ -15,10 +15,10 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('supplier_id');
-            $table->foreign('supplier_id')
+            $table->unsignedBigInteger('reale_estate_id');
+            $table->foreign('reale_estate_id')
             ->references('id')
-            ->on('suppliers')
+            ->on('real_eestates')
             ->onDelete('cascade');
             $table->string('image');
             $table->integer('index')->nullble();

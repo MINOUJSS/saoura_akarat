@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
         $this->call([
-            //Admin_table_seeder::class,
+            Admin_Table_Seeder::class,
             // User_Table_Seeder::class,
             Garages_Table_seeder::class,
             RealeEstate_Type_Table_Seeder::class,
@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             Sub_Sub_Category_Table_Seeder::class,
             Wilaya_Table_Seeder::class,
             Dayra_Table_Seeder::class,
-            Baladia_Table_Seeder::class
+            Baladia_Table_Seeder::class,
+            Etage_Number_Table_Seeder::class
 
         ]);
     }

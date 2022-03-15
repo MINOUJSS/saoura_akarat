@@ -9,7 +9,8 @@
     
     <title>الساورة للعقارات</title> 
   <link href="{{ asset(get_public_folder().'/sites/css/bootstrap.css') }}" rel="stylesheet" />
-	<link href="{{ asset(get_public_folder().'/sites/css/coming-sssoon.css') }}" rel="stylesheet" />    
+	<link href="{{ asset(get_public_folder().'/sites/css/coming-sssoon.css') }}" rel="stylesheet" /> 
+  <link href="{{ asset(get_public_folder().'/sites/css/style.css') }}" rel="stylesheet" />    
 
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -95,8 +96,10 @@
       </div>
     </div>
  </div>
+ @include('sweetalert::alert')
  </body>
    <script src="{{asset(get_public_folder().'/sites/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
    <script src="{{asset(get_public_folder().'/sites/js/bootstrap.min.js')}}" type="text/javascript"></script>
+   <script src="{{asset(get_public_folder().'/sites/js/my_functions.js')}}" type="text/javascript"></script>
 
 </html>

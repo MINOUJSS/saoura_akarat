@@ -21,37 +21,81 @@
              ما عليك سوى ملْ هذه الإستمارة ونحن نتكفل بالباقي. 
             </h5>
             <div class="row">
-                <div class="col-md-4 col-md-offset-4 col-sm6-6 col-sm-offset-3 ">
+                <div class="col-md-6 col-md-offset-3 col-sm6-6 col-sm-offset-3 ">
                     <form class="form-inline" role="form">
-                      <div class="form-group">
+                      <div class="form-group {{$errors->has('name')? 'has-error':''}}"  style="margin:5px;">
                         <label class="sr-only" for="name">الإسم</label>
-                        <input type="text" class="form-control transparent" placeholder="أكتب إسمك">
+                        <input name="name" type="text" class="form-control transparent" placeholder="أكتب إسمك">
+                        @if($errors->has('name'))
+                        <span class="help-block">
+                        {{ $errors->first('name')}}
+                        </span>
+                        @endif
                       </div>
-                      <div class="form-group">
+                      <div class="form-group {{$errors->has('phone')? 'has-error':''}}" style="margin:5px;">
                         <label class="sr-only" for="mobile">رقم الهاتف</label>
-                        <input type="number" class="form-control transparent" placeholder="أدخل رقم الهاتف">
+                        <input name="phone" type="tel" class="form-control transparent" placeholder="أدخل رقم الهاتف">
+                        @if($errors->has('phone'))
+                        <span class="help-block">
+                          {{$errors->first('phone')}}
+                        </span>
+                        @endif
                       </div>
-                      <div class="form-group">
-                        <label class="sr-only" for="type_rent_or_buy">نوع العقار</label>
-                        <select class="form-control transparent" name="type_rent_or_buy" id="type_rent_or_buy">
-                            <option value="0" class="form-control">إختر نوع المعاملة</option>
-                            <option value="1" class="form-control">شراء</option>
-                            <option value="2" class="form-control">كراء</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
+                      <div class="form-group {{$errors->has('r_e_type')? 'has-error' : ''}}" style="margin:5px;">
                         <label class="sr-only" for="type_real_estate">نوع العقار</label>
-                        <select class="form-control transparent" name="type_real_estate" id="type_real_estate">
-                            <option value="0" class="form-control">إختر نوع العقار</option>
-                            <option value="1" class="form-control">ستيديو</option>
-                            <option value="2" class="form-control">منزل</option>
-                            <option value="3" class="form-control">مرأب</option>
-                            <option value="4" class="form-control">مزرعة</option>
+                        <select name="r_e_type" class="form-control transparent" name="type_real_estate" id="type_real_estate">
+                          <option value="0" class="form-control">إختر نوع العقار</option>
+                          @foreach ($reale_estate_types as $item)
+                          <option value="{{$item->id}}" class="form-control">{{$item->type}}</option>  
+                          @endforeach  
                         </select>
+                        @if ($errors->has('r_e_type'))
+                            <span class="help-block">
+                              {{$errors->first('r_e_type')}}
+                            </span>
+                        @endif
                       </div>
-                      <div class="form-group">
-                      <button type="submit" class="btn btn-danger btn-fill">حفظ</button>
+                      <div class="form-group {{$errors->has('tronsaction')? 'has-error' : ''}}" style="margin:5px;">
+                        <label class="sr-only" for="type_rent_or_buy">إختر نوع المعاملة</label>      
+                        <select name="tronsaction" class="form-control transparent" name="type_rent_or_buy" id="type_rent_or_buy">
+                          <option value="0" class="form-control">إختر نوع المعاملة</option>
+                          @foreach ($tronsaction as $item)
+                          <option value="{{$item->id}}" class="form-control">{{$item->tronsaction}}</option>
+                          @endforeach
+                        </select>
+                        @if ($errors->has('tronsaction'))
+                            <span class="help-block">
+                              {{$errors->first('tronsaction')}}
+                            </span>
+                        @endif
                       </div>
+                      <div class="form-group {{$errors->has('wilaya')? 'has-error' : ''}}" style="margin:5px;">
+                        <label class="sr-only" for="wilaya">الولاية</label>
+                        <select name="wilaya" class="form-control transparent" id="select_wilaya">
+                          <option value="0" class="form-control">إختر الولاية</option>
+                          @foreach ($wilayas as $wilaya)
+                          <option value="{{$wilaya->id}}" class="form-control">{{$wilaya->ar_name}}</option>  
+                          @endforeach  
+                        </select>
+                        @if ($errors->has('wilaya'))
+                            <span class="help-block">
+                              {{$errors->first('wilaya')}}
+                            </span>
+                        @endif
+                      </div>
+                      <div id="dayra" class="form-group" style="margin:5px;">
+                        {{-- <label class="sr-only" for="wilaya">الدائرة</label>
+                        <select name="dayra" class="form-control transparent" id="select_dayra">
+                          <option value="0" class="form-control">إختر الدائرة</option>
+                        </select> --}}
+                      </div>
+                      <div id="baladia" class="form-group" style="margin:5px;"></div>      
+                      <div class="row">
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-danger btn-fill">حفظ</button>
+                        </div>
+                      </div>
+                      
                     </form>
 
                 </div>

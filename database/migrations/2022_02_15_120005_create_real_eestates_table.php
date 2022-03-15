@@ -15,19 +15,26 @@ class CreateRealEestatesTable extends Migration
     {
         Schema::create('real_eestates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('phone');
-            $table->string('realestate_type');
-            $table->integer('rooms');
-            $table->integer('baths');
-            $table->integer('etages');
-            $table->integer('facad');
-            $table->integer('furnished');
-            $table->integer('property');
-            $table->integer('transaction');
-            $table->integer('garage');
-            $table->text('google_map_code');
-            $table->text('description');
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('type');
+            $table->string('rooms')->nullable();
+            $table->string('baths')->nullable();
+            $table->string('etages')->nullable();
+            $table->string('etage_number')->nullable();
+            $table->string('facad')->nullable();
+            $table->string('furnished')->nullable();
+            $table->string('property')->nullable();
+            $table->string('transaction')->nullable();
+            //$table->integer('garage');
+            $table->text('price')->nullable();
+            $table->string('wilaya')->nulable();
+            $table->string('dayra')->nullable();;
+            $table->string('baladia')->nullable();
+            $table->text('address')->nullable();
+            $table->text('google_map_code')->nullable();
+            $table->text('description')->nullable();
+            $table->text('rolls')->nullable();
             $table->timestamps();
         });
     }

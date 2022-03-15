@@ -820,7 +820,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
         width: 190px;
     }   
     .footer{
-        position: fixed;
+        /* position: fixed; */
         bottom: 20px;
     }
 }
