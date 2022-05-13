@@ -1,0 +1,37 @@
+.owl-carousel.owl-loaded {
+direction: ltr !important;
+}
+.me-3 {
+    margin-left: 1rem !important;
+}
+.navbar .dropdown-toggle::after {
+    margin-right: 5px;
+}
+.me-2 {
+    margin-left: 0.5rem !important;
+}
+.end-0 {
+    left: 0 !important;
+}
+.footer .btn.btn-link {
+    text-align: right;
+}
+.footer .btn.btn-link::before {
+    content: "\f104";
+    margin-left: 10px;
+}
+.text-md-end {
+    text-align: left!important;
+}
+.text-md-start {
+    text-align: right!important;
+}
+.header-carousel .owl-nav {
+    right: -25px !important;
+}
+/*:::::::::::::::::::::::::::::::::::::*/
+@media (min-width: 992px){
+.text-lg-end {
+    text-align: left !important;
+}
+}

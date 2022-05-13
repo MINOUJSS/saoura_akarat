@@ -27,13 +27,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="{{url('admins')}}/dist/css/skins/skin-blue.min.css">
-
+    <!--ckeditor css-->
+    <link rel="stylesheet" href="{{asset('admins/plugins/ckeditor/content.css')}}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+      <!--ckeditor-->
+      <script src="{{asset('admins/plugins/ckeditor/config.js')}}"></script>
+      <script src="{{asset('admins/plugins/ckeditor/ckeditor.js')}}"></script>
+      <script src="{{asset('admins/plugins/ckeditor/style.js')}}"></script>
   </head>
   <!--
   BODY TAG OPTIONS:
@@ -78,17 +83,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div><!-- ./wrapper -->
 
     <!-- REQUIRED JS SCRIPTS -->
-
+    @include('sweetalert::alert')
     <!-- jQuery 2.1.4 -->
     <script src="{{url('admins')}}/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{url('admins')}}/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{url('admins')}}/dist/js/app.min.js"></script>
-
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the
          user experience. Slimscroll is required when using the
          fixed layout. -->
+    <script>
+          CKEDITOR.replace('ckeditor');
+    </script>
   </body>
 </html>

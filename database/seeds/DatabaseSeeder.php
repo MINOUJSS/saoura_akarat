@@ -30,7 +30,11 @@ class DatabaseSeeder extends Seeder
             Wilaya_Table_Seeder::class,
             Dayra_Table_Seeder::class,
             Baladia_Table_Seeder::class,
-            Etage_Number_Table_Seeder::class
+            Etage_Number_Table_Seeder::class,
+            Contra_Table_Seeder::class,
+            //-------test data
+            Add_Facke_Reale_Estate_Table_Seeder::class,
+            Add_Facke_image_to_Reale_Estate_Table_Seeder::class
 
         ]);
     }

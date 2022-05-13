@@ -42,5 +42,10 @@ class RealeEstate_Type_Table_Seeder extends Seeder
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
+        DB::table('reale_estate_types')->insert([
+            'type' =>'مكتب',
+            'created_at'=>date('Y-m-d h:i:s'),
+            'updated_at'=>date('Y-m-d h:i:s')
+        ]);
     }
 }

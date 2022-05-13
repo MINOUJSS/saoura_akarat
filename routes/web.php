@@ -34,30 +34,77 @@ Route::prefix('admin')->group(function(){
     Route::get('/logout','Auth\AdminLoginController@logout')->name('admin.logout');
     //Dashboard Route
     Route::get('/','Admin\AdminController@index')->name('admin.dashboard');
-    //Reale Estate Route
+    //-------Reale Estate Route
     //index
     Route::get('/reale-estates','Admin\RealeEstatesController@index')->name('admin.reale_estates');
     //detailes
     Route::get('/detailes/reale-estate/{id}','Admin\RealeEstatesController@detailes')->name('admin.reale_estate.detailes');
+    //notification detailes
+    Route::get('/detailes/reale-estate/{id}/{note_id}','Admin\RealeEstatesController@notification_detailes')->name('admin.reale_estate.notification.detailes');
     //delete
     Route::delete('/delete/reale-estate/{id}','Admin\RealeEstatesController@destroy')->name('admin.reale_estate.destroy');
-    //update
+    //edit
     Route::put('/edit/reale-estate/{id}','Admin\RealeEstatesController@edit')->name('admin.reale_estate.edit');
+    //update
+    Route::put('/update/reale-estate/{id}','Admin\RealeEstatesController@update')->name('admin.reale_estate.update');
+    //------ Reale Estate Type Route
+    //apartments
+    Route::get('/reale-estate/type/apartments','Admin\RealeEstatesController@apartments')->name('admin.reale-estate.type.apartments');
+    //houses
+    Route::get('/reale-estate/type/houses','Admin\RealeEstatesController@houses')->name('admin.reale-estate.type.houses');
+    //studios
+    Route::get('/reale-estate/type/studios','Admin\RealeEstatesController@studios')->name('admin.reale-estate.type.studios');
+    //farms
+    Route::get('/reale-estate/type/farms','Admin\RealeEstatesController@farms')->name('admin.reale-estate.type.farms');
+    //lands
+    Route::get('/reale-estate/type/lands','Admin\RealeEstatesController@lands')->name('admin.reale-estate.type.lands');
+    //shops
+    Route::get('/reale-estate/type/shops','Admin\RealeEstatesController@shops')->name('admin.reale-estate.type.shops');
+    //bereaus
+    Route::get('/reale-estate/type/bereaus','Admin\RealeEstatesController@bereaus')->name('admin.reale-estate.type.bereaus');
+    //-----contra route
+    //edit
+    Route::get('/edit/contra','Admin\ContraController@index')->name('admin.edit.contra');
+    //update
+    Route::put('/update/contra','Admin\ContraController@update')->name('admin.update.contra');
+    //--------order to find reale estates routes
+    //index
+    Route::get('/reale-estate/all-orders-to-find','Admin\OrderToFindRealeEstateController@index')->name('admin.reale_estate.all.orders.to.find');
+    //notification detailes
+    Route::get('/reale-estate/order-to-find/{id}/{note_id}','Admin\OrderToFindRealeEstateController@notification_detailes')->name('admin.reale_estate.order.to.find.notification.detailes');
+    //detailes
+    Route::get('/reale-estate/order-to-find/{id}','Admin\OrderToFindRealeEstateController@detailes')->name('admin.reale_estate.order.to.find.detailes');
+    //edit
+    Route::get('/reale-estate/order-to-find/edit/{id}','Admin\OrderToFindRealeEstateController@edit')->name('admin.reale_estate.order.to.find.edit');
+    //update
+    Route::put('/reale-estate/order-to-find/update','Admin\OrderToFindRealeEstateController@update')->name('admin.reale_estate.order.to.find.update');
+    //--------order to find reale estates by tronsaction routes
+    //fore rent
+    Route::get('/order-to-find/transaction/for-rent','Admin\OrderToFindRealeEstateController@forRent')->name('admin.reale_estate.order.to.find.transaction.for.rent');
+    //fore sall
+    Route::get('/order-to-find/transaction/for-sall','Admin\OrderToFindRealeEstateController@forSall')->name('admin.reale_estate.order.to.find.transaction.for.sall');
+    //fore change
+    Route::get('/order-to-find/transaction/for-change','Admin\OrderToFindRealeEstateController@forChange')->name('admin.reale_estate.order.to.find.transaction.for.change');
+    //add to liked list
+    Route::post('/order-to-find/add-to-liked_list','Admin\OrderToFindRealeEstateController@add_to_liked_list')->name('admin.add.to.liked.list');
+    //add to unliked list
+    Route::post('/order-to-find/add-to-unliked_list','Admin\OrderToFindRealeEstateController@add_to_unliked_list')->name('admin.add.to.unliked.list');
 });
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::
                      Site routes
 :::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 //++++++++++++++++requesting routes+++++++++++++++++++++++
-Route::get('/getdayras/{wilaya_id}','Site\RealEstateCustomerController@getdayras')->name('getdayras');
-Route::get('/getbaladias/{dayra_id}','Site\RealEstateCustomerController@getbaladias')->name('getbaladias');
+Route::get('/getdayras/{wilaya_id}','Site\Landing_page\RealEstateCustomerController@getdayras')->name('getdayras');
+Route::get('/getbaladias/{dayra_id}','Site\Landing_page\RealEstateCustomerController@getbaladias')->name('getbaladias');
 //++++++++++++++++++++++++++++++++++++++
 //landin page route
-Route::get('/','Site\LandingPageController@index')->name('landing_page');
+Route::get('/Landing_page','Site\Landing_page\LandingPageController@index')->name('landing_page');
 //register_real estate rout
-Route::get('/register-real-estate','Site\RealEstateController@register')->name('site-register-real-estate');
-Route::post('/store-real-estate','Site\RealEstateController@store')->name('site-store-real-estate');
+Route::get('/Landing_page/register-real-estate','Site\Landing_page\RealEstateController@register')->name('site-landing-page-register-real-estate');
+Route::post('/Landing_page/store-real-estate','Site\Landing_page\RealEstateController@store')->name('site-landing-page-store-real-estate');
 //register customer
-Route::get('/register-real-estate-customer','Site\RealEstateCustomerController@register')->name('site-register-real-estate-customer');
-Route::get('/store-real-estate-customer','Site\RealEstateCustomerController@store')->name('site-store-real-estate-customer');
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/Landing_page/register-real-estate-customer','Site\Landing_page\RealEstateCustomerController@register')->name('site-landing-page-register-real-estate-customer');
+Route::post('/Landing_page/store-real-estate-customer','Site\Landing_page\RealEstateCustomerController@store')->name('site-landing-page-store-real-estate-customer');
+//+++++++++++++++++++ guests routes ++++++++++++++++++
+Route::get('/', 'Site\HomeController@index')->name('site.index');

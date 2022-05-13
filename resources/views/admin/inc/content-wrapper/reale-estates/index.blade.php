@@ -51,6 +51,7 @@
                 <th>التاريخ</th>
                 <th style="white-space: nowrap;">العمليات</th>
               </tr>
+              @if(count($reale_estates)>0)
               @foreach ($reale_estates as $index => $item)
               <tr>
                 <td>{{$item->id}}</td>
@@ -86,13 +87,36 @@
                   {{-- show details --}}
                   <a href="{{route('admin.reale_estate.detailes',$item->id)}}" class="btn btn-info"><i class="fa fa-info"> تفاصيل</i></a>
                   {{-- edit btn --}}
-                  <button onclick="event.preventDefault();if(confirm('هل تريد التعديل على هذا العقار؟'))document.getElementById('edit-{{$item->id}}').submit();" type="submit" class="btn btn-success"><i class="fa fa-edit"> تعديل</i></button>
+                  <button onclick="document.getElementById('edit-{{$item->id}}').submit();" type="submit" class="btn btn-success"><i class="fa fa-edit"> تعديل</i></button>
                   {{-- delete btn --}}
                   <button onclick="event.preventDefault();if(confirm('هل تريد فعلا حدف هذا العقار؟'))document.getElementById('delete-{{$item->id}}').submit();" type="submit" class="btn btn-danger"><i class="fa fa-trash"> حذف</i></button>
                   
                 </td>
               </tr>
-              @endforeach                            
+              @endforeach  
+              @else
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>لا توجد عقارات مسجلة</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              @endif                          
             </tbody></table>
           </div><!-- /.box-body -->
         </div><!-- /.box -->

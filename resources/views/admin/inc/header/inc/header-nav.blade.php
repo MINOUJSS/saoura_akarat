@@ -11,31 +11,33 @@
         <!-- Menu toggle button -->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="fa fa-envelope-o"></i>
-          <span class="label label-success">4</span>
+          <span class="label label-success">{{count(get_no_reading_message_notifications())}}</span>
         </a>
         <ul class="dropdown-menu">
-          <li class="header">You have 4 messages</li>
+          <li class="header">{{print_no_reading_message_notifications_to_string()}}</li>
           <li>
             <!-- inner menu: contains the messages -->
             <ul class="menu">
+              @foreach (get_no_reading_message_notifications() as $note)
               <li><!-- start message -->
-                <a href="#">
+                <a href="{{$note['link']}}">
                   <div class="pull-right">
                     <!-- User Image -->
-                    <img src="{{url('admins')}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="{{url('admins')}}/dist/img/avatar04.png" class="img-circle" alt="User Image">
                   </div>
                   <!-- Message title and timestamp -->
                   <h4>
-                    Support Team
-                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                    {{$note['notification']}}
+                     {{-- <small><i class="fa fa-clock-o"></i> {{$note['created_at']}}</small> --}}
                   </h4>
                   <!-- The message -->
-                  <p>Why not buy a new awesome theme?</p>
+                  <p>إضغط هنا لمشاهدة تفاصيل الرسالة</p>
                 </a>
               </li><!-- end message -->
+              @endforeach          
             </ul><!-- /.menu -->
           </li>
-          <li class="footer"><a href="#">See All Messages</a></li>
+          <li class="footer"><a href="#">مشاهدة الكل</a></li>
         </ul>
       </li><!-- /.messages-menu -->
 
@@ -44,24 +46,51 @@
         <!-- Menu toggle button -->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="fa fa-bell-o"></i>
-          <span class="label label-warning">10</span>
+          <span class="label label-warning">{{count(get_no_reading_order_notifications())}}</span>
         </a>
         <ul class="dropdown-menu">
-          <li class="header">You have 10 notifications</li>
+          <li class="header">{{print_no_reading_order_notifications_to_string()}}</li>
           <li>
             <!-- Inner Menu: contains the notifications -->
             <ul class="menu">
+              @foreach (get_no_reading_order_notifications() as $note)
               <li><!-- start notification -->
-                <a href="#">
-                  <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                <a href="{{$note['link']}}">
+                  <i class="{{$note['icon_class']}} text-aqua"></i> {{$note['notification']}}
                 </a>
-              </li><!-- end notification -->
+              </li><!-- end notification --> 
+              @endforeach              
             </ul>
           </li>
-          <li class="footer"><a href="#">View all</a></li>
+          <li class="footer"><a href="#">مشاهدة الكل</a></li>
         </ul>
       </li>
-      <!-- Tasks Menu -->
+      <!-- Start Reale Estate Notifications -->
+      <li class="dropdown notifications-menu">
+        <!-- Menu toggle button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-home"></i>
+          <span class="label label-danger">{{count(get_no_reading_reale_estate_notifications())}}</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="header">{{print_no_reading_reale_estate_notifications_to_string()}}</li>
+          <li>
+            <!-- Inner Menu: contains the notifications -->
+            <ul class="menu">
+              @foreach (get_no_reading_reale_estate_notifications() as $note)
+              <li><!-- start notification -->
+                <a href="{{$note['link']}}">
+                  <i class="{{$note['icon_class']}} text-aqua"></i> {{$note['notification']}}
+                </a>
+              </li><!-- end notification -->  
+              @endforeach      
+            </ul>
+          </li>
+          <li class="footer"><a href="#">مشاهدة الكل</a></li>
+        </ul>
+      </li>
+      <!--End Reale Estate Notification
+      {{-- <!-- Tasks Menu -->
       <li class="dropdown tasks-menu">
         <!-- Menu Toggle Button -->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -88,14 +117,14 @@
                     </div>
                   </div>
                 </a>
-              </li><!-- end task item -->
+              </li><!-- end task item --> --}}
             </ul>
           </li>
           <li class="footer">
             <a href="#">View all tasks</a>
           </li>
         </ul>
-      </li>
+      </li>-->
       <!-- User Account Menu -->
       <li class="dropdown user user-menu">
         <!-- Menu Toggle Button -->
@@ -103,15 +132,15 @@
           <!-- The user image in the navbar-->
           <img src="{{url('admins')}}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
           <!-- hidden-xs hides the username on small devices so only the image appears. -->
-          <span class="hidden-xs">Alexander Pierce</span>
+          <span class="hidden-xs">{{Auth::guard('admin')->user()->name}}</span>
         </a>
         <ul class="dropdown-menu">
           <!-- The user image in the menu -->
           <li class="user-header">
             <img src="{{url('admins')}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             <p>
-              {{Auth::user()->name}} - Web Developer
-              <small>مديرالموقع {{Auth::user()->created_at->diffForHumans()}}</small>
+              {{Auth::guard('admin')->user()->name}} - {{admin_type_to_string(Auth::guard('admin')->user()->type)}}
+              <small>{{admin_type_to_string(Auth::guard('admin')->user()->type)}} {{Auth::guard('admin')->user()->created_at->diffForHumans()}}</small>
             </p>
           </li>
           <!-- Menu Body -->
@@ -129,10 +158,10 @@
           <!-- Menu Footer-->
           <li class="user-footer">
             <div class="pull-left">
-              <a href="#" class="btn btn-default btn-flat">Profile</a>
+              <a href="#" class="btn btn-default btn-flat">الملف الشخصي</a>
             </div>
             <div class="pull-right">
-              <a href="{{route('admin.logout')}}" class="btn btn-default btn-flat">Sign out</a>
+              <a href="{{route('admin.logout')}}" class="btn btn-default btn-flat">خروج</a>
             </div>
           </li>
         </ul>

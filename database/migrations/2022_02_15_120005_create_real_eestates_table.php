@@ -35,6 +35,7 @@ class CreateRealEestatesTable extends Migration
             $table->text('google_map_code')->nullable();
             $table->text('description')->nullable();
             $table->text('rolls')->nullable();
+            $table->integer('statu')->default(0);
             $table->timestamps();
         });
     }
