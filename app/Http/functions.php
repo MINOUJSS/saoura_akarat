@@ -497,9 +497,83 @@ function is_in_liked_or_unliked_list($order_id,$r_estate_id)
     }
     else
     {
-
+        return true;
     }
-    return true;
+}
+//
+function reale_estate_has_operation($id)
+{
+    $operation=App\Operation::where('reale_estate_id',$id)->first();
+    if($operation!=null){
+        return true;
+    }else
+    {
+      return false;
+    }
+}
+//
+function order_to_find_has_operation($id)
+{
+    $operation=App\Operation::where('order_id',$id)->first();
+    if($operation!=null){
+        return true;
+    }else
+    {
+      return false;
+    }
+}
+//
+function print_reale_estate_statu($id)
+{
+ $reale_estate=App\RealEestate::findOrFail($id);
+ if($reale_estate->statu==0)
+ {
+     $html='<span class="label label-warning">قيد اللإنتظار</span>';
+ }elseif($reale_estate->statu==1)
+ {
+    $html='<span class="label label-danger">محجوز مؤقتاً</span>';
+ }elseif($reale_estate->statu==2)
+ {
+    $html='<span class="label label-info">محجوز بعربون</span>';
+ }elseif($reale_estate->statu==3)
+ {
+    $html='<span class="label label-success">تم الكراء</span>';
+ }elseif($reale_estate->statu==4)
+ {
+    $html='<span class="label label-success">تم البيع</span>';
+ }else
+ {
+    $html='<span class="label label-success">تم التبديل</span>';
+ }
+ return $html;
+}
+//
+function print_order_to_find_statu($id)
+{
+ $order_to_find=App\OrderToFindRealeEstate::findOrFail($id);
+ if($order_to_find->statu==0)
+ {
+     $html='<span class="label label-warning">قيد اللإنتظار</span>';
+ }elseif($order_to_find->statu==1)
+ {
+    $html='<span class="label label-danger">قام بحجز مؤقت</span>';
+ }elseif($order_to_find->statu==2)
+ {
+    $html='<span class="label label-info">قام بحجز بعربون</span>';
+ }elseif($order_to_find->statu==3)
+ {
+    $html='<span class="label label-success">قام بالكراء</span>';
+ }elseif($order_to_find->statu==4)
+ {
+    $html='<span class="label label-success">قام بالشراء</span>';
+ }elseif($order_to_find->statu==5)
+ {
+    $html='<span class="label label-success">قام بالتبديل</span>';
+ }else
+ {
+    $html='<span class="label label-warning">قيد البحث</span>';  
+ }
+ return $html;
 }
 /*:::::::::::::::::::::::::::::::::::::::::::::::::
                 Site functions

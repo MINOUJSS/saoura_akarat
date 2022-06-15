@@ -71,7 +71,7 @@
                 <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->baladia}}@endif</td>
                 <td>{{$item->created_at->diffForHumans()}}</td>
                 <td>
-                  <span class="btn btn-warning">قيد اللإنتظار</span>
+                  {!!print_order_to_find_statu($item->id)!!}
                 </td>
               </tr>
               @endforeach  

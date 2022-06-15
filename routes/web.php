@@ -89,6 +89,13 @@ Route::prefix('admin')->group(function(){
     Route::post('/order-to-find/add-to-liked_list','Admin\OrderToFindRealeEstateController@add_to_liked_list')->name('admin.add.to.liked.list');
     //add to unliked list
     Route::post('/order-to-find/add-to-unliked_list','Admin\OrderToFindRealeEstateController@add_to_unliked_list')->name('admin.add.to.unliked.list');
+    //-------Operations Route
+    Route::get('/operations','Admin\OperationsController@index')->name('admin.operation.index');
+    Route::post('/operations/create','Admin\OperationsController@create')->name('admin.operation.create');
+    Route::post('/operations/store','Admin\OperationsController@store')->name('admin.operation.store');
+    Route::post('/operations/edit','Admin\OperationsController@edit')->name('admin.operation.edit');
+    Route::post('/operations/update','Admin\OperationsController@update')->name('admin.operation.update');
+    Route::get('/operations/destroy/{id}','Admin\OperationsController@destroy')->name('admin.operation.destroy');
 });
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -108,3 +115,7 @@ Route::get('/Landing_page/register-real-estate-customer','Site\Landing_page\Real
 Route::post('/Landing_page/store-real-estate-customer','Site\Landing_page\RealEstateCustomerController@store')->name('site-landing-page-store-real-estate-customer');
 //+++++++++++++++++++ guests routes ++++++++++++++++++
 Route::get('/', 'Site\HomeController@index')->name('site.index');
+Route::get('/من-نحن','Site\AboutUsController@index')->name('site.about_us');
+Route::get('/إتصل-بنا','Site\ContactUsController@index')->name('site.contact_us');
+Route::get('/سياسة خصوصية','Site\ContraController@index')->name('site.contra');
+Route::get('/reale-estate/{r_e_id}/photos','Site\RealeEstateController@photos')->name('site.reale_estate.photos');

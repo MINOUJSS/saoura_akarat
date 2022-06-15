@@ -75,6 +75,10 @@
               <td><a href="tel:{{$reale_estate->phone}}"><i class="fa fa-phone"> {{$reale_estate->phone}}</i></a></td>
             </tr>
             <tr>
+              <td>حالة العقار</td>
+              <td>{!!print_reale_estate_statu($reale_estate->id)!!}</td>
+            </tr>
+            <tr>
               <td>نوع العقار</td>
               <td>{{$reale_estate->type}}</td>
             </tr>
@@ -202,7 +206,7 @@
                 <td>
                   <span class="label label-warning">قيد اللإنتظار</span>
                 </td>
-                <td>
+                <td style="display:inline-flex;>
                   {{-- <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="order_id" value="{{$ordertofind->id}}">
@@ -217,7 +221,28 @@
                 {{-- <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا العقار لقائمة الإعجاب؟'))document.getElementById('add_to_liked_list_{{$item->id}}').submit();" type="submit" class="btn btn-success"> أعجبه</button> --}}
                 {{-- like btn --}}  
                 <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة عدم الإعجاب؟'))document.getElementById('add_to_unliked_list_{{$item->id}}').submit();" type="submit" class="btn btn-danger"> لم يعجبه</button>  
-                </td>
+                  <!---->
+                @if(order_to_find_has_operation($item->id))                
+                <form id="edit_form_{{$item->id}}" action="{{route('admin.operation.edit')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-warning" value="تعديل عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('edit_form_{{$item->id}}').submit();" class="btn btn-warning operation-btn"> تعديل عملية</button>
+                {{-- <a href="{{route('admin.operation.edit',$item->id)}}" class="btn btn-warning">تعديل عملية</a> --}}
+                @else 
+                <form id="create_form_{{$item->id}}" class="form-group" action="{{route('admin.operation.create')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-info" value="إضافة عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('create_form_{{$item->id}}').submit();" class="btn btn-info operation-btn"> إضافة عملية</button>
+                {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
+                @endif
+                <!---->
+              </td>
               </tr>
               @endforeach  
               @else
@@ -304,7 +329,7 @@
                 <td>
                   <span class="label label-warning">قيد اللإنتظار</span>
                 </td>
-                <td>
+                <td style="display:inline-flex;>
                   <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="order_id" value="{{$item->id}}">
@@ -319,7 +344,28 @@
                 <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة الإعجاب؟'))document.getElementById('add_to_liked_list_{{$item->id}}').submit();" type="submit" class="btn btn-success"> أعجبه</button>
                 {{-- like btn --}}  
                 {{-- <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا العقار لقائمة عدم الإعجاب؟'))document.getElementById('add_to_unliked_list_{{$item->id}}').submit();" type="submit" class="btn btn-danger"> لم يعجبه</button>   --}}
-                </td>
+                  <!---->
+                @if(order_to_find_has_operation($item->id))                
+                <form id="edit_form_{{$item->id}}" action="{{route('admin.operation.edit')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-warning" value="تعديل عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('edit_form_{{$item->id}}').submit();" class="btn btn-warning operation-btn"> تعديل عملية</button>
+                {{-- <a href="{{route('admin.operation.edit',$item->id)}}" class="btn btn-warning">تعديل عملية</a> --}}
+                @else 
+                <form id="create_form_{{$item->id}}" class="form-group" action="{{route('admin.operation.create')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-info" value="إضافة عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('create_form_{{$item->id}}').submit();" class="btn btn-info operation-btn"> إضافة عملية</button>
+                {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
+                @endif
+                <!---->
+              </td>
               </tr>
               @endforeach  
               @else
@@ -404,7 +450,7 @@
                   </tr>
                   @if(count($exactly_orders_to_find)>0)
                   @foreach ($exactly_orders_to_find as $index => $item)
-                  @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id))
+                  @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id) && !order_to_find_has_operation($item->id))
                   <tr>
                     <td>{{$index+1}}</td>
                     <td>{{$item->id}}</td>
@@ -424,9 +470,9 @@
                     <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->baladia}}@endif</td>
                     <td>{{$item->created_at->diffForHumans()}}</td>
                     <td>
-                      <span class="btn btn-warning">قيد اللإنتظار</span>
+                     {!!print_order_to_find_statu($item->id)!!}
                     </td>
-                    <td>
+                    <td style="display:inline-flex;>
                       <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="order_id" value="{{$item->id}}">
@@ -441,7 +487,28 @@
                     <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة الإعجاب؟'))document.getElementById('add_to_liked_list_{{$item->id}}').submit();" type="submit" class="btn btn-success"> أعجبه</button>
                     {{-- like btn --}}  
                     <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة عدم الإعجاب؟'))document.getElementById('add_to_unliked_list_{{$item->id}}').submit();" type="submit" class="btn btn-danger"> لم يعجبه</button>  
-                    </td>
+                  <!---->
+                @if(order_to_find_has_operation($item->id))                
+                <form id="edit_form_{{$item->id}}" action="{{route('admin.operation.edit')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-warning" value="تعديل عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('edit_form_{{$item->id}}').submit();" class="btn btn-warning operation-btn"> تعديل عملية</button>
+                {{-- <a href="{{route('admin.operation.edit',$item->id)}}" class="btn btn-warning">تعديل عملية</a> --}}
+                @else 
+                <form id="create_form_{{$item->id}}" class="form-group" action="{{route('admin.operation.create')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-info" value="إضافة عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('create_form_{{$item->id}}').submit();" class="btn btn-info operation-btn"> إضافة عملية</button>
+                {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
+                @endif
+                <!---->  
+                  </td>
                   </tr>
                   @endif
                   @endforeach  
@@ -498,7 +565,7 @@
                   </tr>
                   @if(count($orders_to_find_by_type)>0)
                   @foreach ($orders_to_find_by_type as $index => $item)
-                  @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id))
+                  @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id) && !order_to_find_has_operation($item->id))
                   <tr>
                     <td>{{$index+1}}</td>
                     <td>{{$item->id}}</td>
@@ -518,9 +585,9 @@
                     <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->baladia}}@endif</td>
                     <td>{{$item->created_at->diffForHumans()}}</td>
                     <td>
-                      <span class="btn btn-warning">قيد اللإنتظار</span>
+                     {!!print_order_to_find_statu($item->id)!!}
                     </td>
-                    <td>
+                    <td style="display:inline-flex;>
                       <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="order_id" value="{{$item->id}}">
@@ -535,7 +602,28 @@
                     <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة الإعجاب؟'))document.getElementById('add_to_liked_list_{{$item->id}}').submit();" type="submit" class="btn btn-success"> أعجبه</button>
                     {{-- like btn --}}  
                     <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة عدم الإعجاب؟'))document.getElementById('add_to_unliked_list_{{$item->id}}').submit();" type="submit" class="btn btn-danger"> لم يعجبه</button>  
-                    </td>
+                  <!---->
+                @if(order_to_find_has_operation($item->id))                
+                <form id="edit_form_{{$item->id}}" action="{{route('admin.operation.edit')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-warning" value="تعديل عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('edit_form_{{$item->id}}').submit();" class="btn btn-warning operation-btn"> تعديل عملية</button>
+                {{-- <a href="{{route('admin.operation.edit',$item->id)}}" class="btn btn-warning">تعديل عملية</a> --}}
+                @else 
+                <form id="create_form_{{$item->id}}" class="form-group" action="{{route('admin.operation.create')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-info" value="إضافة عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('create_form_{{$item->id}}').submit();" class="btn btn-info operation-btn"> إضافة عملية</button>
+                {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
+                @endif
+                <!---->  
+                  </td>
                   </tr>
                   @endif
                   @endforeach  
@@ -592,7 +680,7 @@
                   </tr>
                   @if(count($orders_to_find_by_transaction)>0)
                   @foreach ($orders_to_find_by_transaction as $index => $item)
-                  @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id))
+                  @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id) && !order_to_find_has_operation($item->id))
                   <tr>
                     <td>{{$index+1}}</td>
                     <td>{{$item->id}}</td>
@@ -612,9 +700,9 @@
                     <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->baladia}}@endif</td>
                     <td>{{$item->created_at->diffForHumans()}}</td>
                     <td>
-                      <span class="btn btn-warning">قيد اللإنتظار</span>
+                     {!!print_order_to_find_statu($item->id)!!}
                     </td>
-                    <td>
+                    <td style="display:inline-flex;>
                       <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="order_id" value="{{$item->id}}">
@@ -629,7 +717,28 @@
                     <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة الإعجاب؟'))document.getElementById('add_to_liked_list_{{$item->id}}').submit();" type="submit" class="btn btn-success"> أعجبه</button>
                     {{-- like btn --}}  
                     <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إضافة هذا الطلب لقائمة عدم الإعجاب؟'))document.getElementById('add_to_unliked_list_{{$item->id}}').submit();" type="submit" class="btn btn-danger"> لم يعجبه</button>  
-                    </td>
+                  <!---->
+                @if(order_to_find_has_operation($item->id))                
+                <form id="edit_form_{{$item->id}}" action="{{route('admin.operation.edit')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-warning" value="تعديل عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('edit_form_{{$item->id}}').submit();" class="btn btn-warning operation-btn"> تعديل عملية</button>
+                {{-- <a href="{{route('admin.operation.edit',$item->id)}}" class="btn btn-warning">تعديل عملية</a> --}}
+                @else 
+                <form id="create_form_{{$item->id}}" class="form-group" action="{{route('admin.operation.create')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$reale_estate->id}}">
+                  <input type="hidden" name="order_id" value="{{$item->id}}">
+                  {{-- <input type="submit" class="btn btn-info" value="إضافة عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('create_form_{{$item->id}}').submit();" class="btn btn-info operation-btn"> إضافة عملية</button>
+                {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
+                @endif
+                <!---->  
+                  </td>
                   </tr>
                   @endif
                   @endforeach  

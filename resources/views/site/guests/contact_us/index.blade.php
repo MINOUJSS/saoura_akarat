@@ -12,7 +12,10 @@
     @include('site.guests.sections.header')
 @endsection
 
+@section('content')
+    @include('site.guests.sections.contact_us')
+@endsection
+
 @section('footer')
     @include('site.guests.sections.footer')
 @endsection
-

@@ -49,6 +49,7 @@
                 <th>الدائرة</th>
                 <th>البلدية</th>
                 <th>التاريخ</th>
+                <th>حالة العقار</th>
                 <th style="white-space: nowrap;">العمليات</th>
               </tr>
               @if(count($reale_estates)>0)
@@ -72,6 +73,7 @@
                 <td>@if($item->dayra==null){{"لم يتم تحديد الدائرة"}}@else{{$item->wilaya}}@endif</td>
                 <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->wilaya}}@endif</td>
                 <td>{{$item->created_at->diffForHumans()}}</td>
+                <td>{!!print_reale_estate_statu($item->id)!!}</td>
                 <td>
                   {{-- edite form --}}
                   <form id="edit-{{$item->id}}"action="{{route('admin.reale_estate.edit',$item->id)}}" method="post">                    

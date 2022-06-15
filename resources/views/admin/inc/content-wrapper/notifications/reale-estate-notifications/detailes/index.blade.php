@@ -404,7 +404,7 @@
                 </tr>
                 @if(count($exactly_orders_to_find)>0)
                 @foreach ($exactly_orders_to_find as $index => $item)
-                @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id))
+                @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id && !order_to_find_has_operation($item->id)))
                 <tr>
                   <td>{{$index+1}}</td>
                   <td>{{$item->id}}</td>
@@ -424,7 +424,7 @@
                   <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->baladia}}@endif</td>
                   <td>{{$item->created_at->diffForHumans()}}</td>
                   <td>
-                    <span class="btn btn-warning">قيد اللإنتظار</span>
+                    {!!print_order_to_find_statu($item->id)!!}
                   </td>
                   <td>
                     <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
@@ -498,7 +498,7 @@
                 </tr>
                 @if(count($orders_to_find_by_type)>0)
                 @foreach ($orders_to_find_by_type as $index => $item)
-                @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id))
+                @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id && !order_to_find_has_operation($item->id)))
                 <tr>
                   <td>{{$index+1}}</td>
                   <td>{{$item->id}}</td>
@@ -518,7 +518,7 @@
                   <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->baladia}}@endif</td>
                   <td>{{$item->created_at->diffForHumans()}}</td>
                   <td>
-                    <span class="btn btn-warning">قيد اللإنتظار</span>
+                    {!!print_order_to_find_statu($item->id)!!}
                   </td>
                   <td>
                     <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
@@ -592,7 +592,7 @@
                 </tr>
                 @if(count($orders_to_find_by_transaction)>0)
                 @foreach ($orders_to_find_by_transaction as $index => $item)
-                @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id))
+                @if(is_in_liked_or_unliked_list($item->id,$reale_estate->id && !order_to_find_has_operation($item->id)))
                 <tr>
                   <td>{{$index+1}}</td>
                   <td>{{$item->id}}</td>
@@ -612,7 +612,7 @@
                   <td>@if($item->baladia==null){{"لم يتم تحديد البلدية"}}@else{{$item->baladia}}@endif</td>
                   <td>{{$item->created_at->diffForHumans()}}</td>
                   <td>
-                    <span class="btn btn-warning">قيد اللإنتظار</span>
+                    {!!print_order_to_find_statu($item->id)!!}
                   </td>
                   <td>
                     <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">

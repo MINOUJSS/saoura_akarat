@@ -54,8 +54,11 @@
         @yield('search')
         <!-- Search End -->
 
+        <!--start conent -->
+        @yield('content')
+        <!--end content -->
 
-        <!-- Category Start -->
+        {{-- <!-- Category Start -->
         @yield('category')
         <!-- Category End -->
 
@@ -82,7 +85,7 @@
 
         <!-- Testimonial Start -->
         @yield('testmonial')
-        <!-- Testimonial End -->
+        <!-- Testimonial End --> --}}
         
 
         <!-- Footer Start -->

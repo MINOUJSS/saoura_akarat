@@ -26,6 +26,7 @@ class CreateOperationsTable extends Migration
             ->on('order_to_find_reale_estates')
             ->onDelete('cascade');
             $table->string('transaction');
+            $table->date('exp_date')->nullable();
             $table->timestamps();
         });
     }
