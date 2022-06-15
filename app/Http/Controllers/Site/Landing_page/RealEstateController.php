@@ -19,7 +19,7 @@ use App\Etages;
 use App\Furnisheds;
 use App\Facads;
 use App\Bathes;
-use App\property;
+use App\Property;
 use App\EtageNumber;
 use App\RealEestate;
 use App\Images;
