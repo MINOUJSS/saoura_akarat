@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="logo cursive">
-        <img src="{{asset(get_public_folder().'/sites/landing_page/images/logo.png')}}">
+        <img src="{{asset('/sites/landing_page/images/logo.png')}}">
         {{-- Sssoon --}}
     </h1>
     
