@@ -9,7 +9,7 @@ use App\RealEestate;
 use App\OrderToFindRealeEstate;
 use App\Images;
 use App\LikedList;
-use App\UnLikedList;
+use App\UnlikedList;
 use Auth;
 
 class RealeEstatesController extends Controller
