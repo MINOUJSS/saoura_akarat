@@ -97,7 +97,7 @@ class RealEstateController extends Controller
             'wilaya'=>new ValidSelectBox,
             'price'=>'required',
             'files'=>'required',
-            'files.*'=>'image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2048',
+            'files.*'=>'image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2000000',
             'contra' =>'required'
         ]);
         /*::::::::::::::::::::::::::::::::::
