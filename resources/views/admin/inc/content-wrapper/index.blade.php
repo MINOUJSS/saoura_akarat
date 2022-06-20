@@ -22,8 +22,8 @@
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">الشقق:<strong>{{count_homes()}}</strong></span>
-                <span class="info-box-number">{{count_homes()}}</span>
+                <span class="info-box-text">الشقق</span>
+                <span class="info-box-number">{{count_apartments()}}</span>
               </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
           </div>
@@ -32,7 +32,7 @@
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">المنازل:<strong>{{count_homes()}}</strong></span>
+                <span class="info-box-text">المنازل</span>
                 <span class="info-box-number">{{count_homes()}}</span>
               </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
@@ -41,8 +41,8 @@
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">ستيديوهات:<strong>{{count_homes()}}</strong></span>
-                <span class="info-box-number">{{count_homes()}}</span>
+                <span class="info-box-text">ستيديوهات</span>
+                <span class="info-box-number">{{count_studios()}}</span>
               </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
           </div>
@@ -50,8 +50,8 @@
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">المزارع:<strong>{{count_homes()}}</strong></span>
-                <span class="info-box-number">{{count_homes()}}</span>
+                <span class="info-box-text">المزارع</span>
+                <span class="info-box-number">{{count_farms()}}</span>
               </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
           </div>
@@ -59,8 +59,8 @@
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">الأراضي:<strong>{{count_homes()}}</strong></span>
-                <span class="info-box-number">{{count_homes()}}</span>
+                <span class="info-box-text">الأراضي</span>
+                <span class="info-box-number">{{count_lands()}}</span>
               </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
           </div>
@@ -68,8 +68,8 @@
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">المحلات(garages):<strong>{{count_homes()}}</strong></span>
-                <span class="info-box-number">{{count_homes()}}</span>
+                <span class="info-box-text">المحلات(garages)</span>
+                <span class="info-box-number">{{count_shops()}}</span>
               </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
           </div>
@@ -77,8 +77,8 @@
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">المكتب:<strong>{{count_homes()}}</strong></span>
-                <span class="info-box-number">{{count_homes()}}</span>
+                <span class="info-box-text">المكتب</span>
+                <span class="info-box-number">{{count_bereaux()}}</span>
               </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
           </div>

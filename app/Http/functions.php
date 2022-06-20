@@ -421,10 +421,6 @@ function active_order_to_find_reale_estate_to_change_link()
 /**---------------------------------------
  * |           reale estate functions
  * ---------------------------------------*/
-function count_homes()
-{
-    return 0;
-}
 function get_reale_estate_type($type_id)
 {
   $r_e_type=App\RealeEstateType::find($type_id);
@@ -575,6 +571,43 @@ function print_order_to_find_statu($id)
  }
  return $html;
 }
+//-----count reale estate functiond----
+function count_homes()
+{
+    $reale_estate=App\RealEestate::where('type','منزل')->get();
+    return count($reale_estate);
+}
+function count_apartments()
+{
+    $reale_estate=App\RealEestate::where('type','شقة')->get();
+    return count($reale_estate);
+}
+function count_studios()
+{
+    $reale_estate=App\RealEestate::where('type','ستيديو')->get();
+    return count($reale_estate);
+}
+function count_farms()
+{
+    $reale_estate=App\RealEestate::where('type','مزرعة')->get();
+    return count($reale_estate);
+}
+function count_lands()
+{
+    $reale_estate=App\RealEestate::where('type','أرض')->get();
+    return count($reale_estate);
+}
+function count_shops()
+{
+    $reale_estate=App\RealEestate::where('type','محل')->get();
+    return count($reale_estate);
+}
+function count_bereaux()
+{
+    $reale_estate=App\RealEestate::where('type','مكتب')->get();
+    return count($reale_estate);
+}
+//
 /*:::::::::::::::::::::::::::::::::::::::::::::::::
                 Site functions
 ::::::::::::::::::::::::::::::::::::::::::::::::::*/
