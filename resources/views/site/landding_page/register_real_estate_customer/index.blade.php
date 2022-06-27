@@ -4,8 +4,9 @@
 
 <div class="container">
     <h1 class="logo cursive">
+      <a href="{{route('landing_page')}}">
         <img src="{{asset('/sites/landing_page/images/logo.png')}}">
-        
+      </a> 
     </h1>
     
     <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->

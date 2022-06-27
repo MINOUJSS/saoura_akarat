@@ -248,7 +248,7 @@ class RealEstateCustomerController extends Controller
                    return back() with success
         :::::::::::::::::::::::::::::::::::*/
         Alert::success('تم إضافة طلب البحث', 'تم إضافة طلبك للبحث بنجاح , ستقوم إدارة الساورة للعقارات بالإتصال بك خلال الـ 24 ساعة القادمة إن شاء الله.');
-        return redirect()->back()->with('success','تم إضافة طلب البحث , ستقوم إدارة الساورة للعقارات بالإتصال بك خلال الـ 24 ساعة القادمة إن شاء الله.');
-        //return back()->with('success','تم إضافة العقار بنجاح , ستقوم إدارة الساورة للعقارات بالإتصال بك خلال الـ 24 ساعة القادمة إن شاء الله.');
+        //return redirect()->back()->with('success','تم إضافة طلب البحث , ستقوم إدارة الساورة للعقارات بالإتصال بك خلال الـ 24 ساعة القادمة إن شاء الله.');
+        return view('site.landding_page.register_real_estate_customer.thank_you');
     }
 }

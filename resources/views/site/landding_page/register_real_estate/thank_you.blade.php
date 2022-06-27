@@ -12,7 +12,7 @@
 <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
   
     <div class="content">
-        <h4 class="motto">الساورة للعقارات تتولى عنكم عناء البحث <br/> و تختصر لكم المسافات.</h4>
+        <h4 class="motto">تم إضافة العقار بنجاح , ستقوم إدارة الساورة للعقارات بالإتصال بك خلال الـ 24 ساعة القادمة إن شاء الله.</h4>
         <div class="subscribe">
             <h5 class="info-text">
                 Join the waiting list for the beta. We keep you posted. 
