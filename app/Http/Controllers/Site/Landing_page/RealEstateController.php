@@ -166,8 +166,9 @@ class RealEstateController extends Controller
                     $constraint->aspectRatio();
                 })->save($distinationPath.'/'.$image_name);
 
-                $distinationPath=public_path('/admins/uploads/images');
-                $image->move($distinationPath,$image_name);
+                //$distinationPath=public_path('/admins/uploads/images');
+                //$image->move($distinationPath,$image_name);
+                
                 //insert image name to images tables
                 $image=new Images;
                 $image->reale_estate_id=$reale_estate->id;

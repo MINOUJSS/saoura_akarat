@@ -36,7 +36,7 @@
             <div class="carousel-inner" role="listbox">
               @foreach($images as $key=>$image)
               <div class="item @if($key==0){{'active'}}@endif">
-                <img src="{{url('/admins/uploads/images').'/'.$image->image}}" alt="{{$image->image}}">
+                <img src="{{url('/admins/uploads/thumbnails').'/'.$image->image}}" alt="{{$image->image}}">
                 <div class="carousel-caption">
                   {{$image->image}}
                 </div>
