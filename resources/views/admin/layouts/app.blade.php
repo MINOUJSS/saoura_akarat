@@ -97,5 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
           CKEDITOR.replace('ckeditor');
     </script>
+
+<script src="{{asset('/sites/landing_page/js/my_functions.js')}}" type="text/javascript"></script>
   </body>
 </html>

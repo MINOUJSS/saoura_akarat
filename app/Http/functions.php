@@ -431,10 +431,20 @@ function get_wilaya_name_from_id($wilaya_id)
     $wilaya=App\Wilaya::find($wilaya_id);
     return $wilaya->ar_name;
 }
+function get_wilaya_id_from_name($wilaya_name)
+{
+    $wilaya=App\Wilaya::where('ar_name',$wilaya_name)->first();
+    return $wilaya->id;
+}
 function get_dayra_name_from_id($dayra_id)
 {
     $dayra=App\Dayra::find($dayra_id);
     return $dayra->ar_name;
+}
+function get_dayra_id_from_name($wilaya_id,$dayra_name)
+{
+    $dayra=App\Dayra::where([['wilaya_id',$wilaya_id],['ar_name',$dayra_name]])->first();
+    return $dayra->id;
 }
 function get_baladia_name_from_id($baladia_id)
 {
@@ -459,7 +469,7 @@ function get_etages_from_id($etage_id)
 function get_etage_number_from_id($etage_number_id)
 {
     $etage_number=App\EtageNumber::find($etage_number_id);
-    return $etage_number->eatge_number;
+    return $etage_number->etage_number;
 }
 function get_facads_from_id($facad_id)
 {

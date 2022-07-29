@@ -67,6 +67,26 @@
         <!-- Table -->
         <table class="table">
           <tr>
+            <td>عمليات على العقار</td>
+            <td> 
+              {{-- edite form --}}
+              <form id="edit-{{$reale_estate->id}}"action="{{route('admin.reale_estate.edit',$reale_estate->id)}}" method="GET">                    
+                @csrf
+                @method('GET')
+                </form>
+                {{-- delete form --}}
+                <form id="delete-{{$reale_estate->id}}" action="{{route('admin.reale_estate.destroy',$reale_estate->id)}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  @method('DELETE')
+                  </form>
+                {{-- edit btn --}}
+                <button onclick="document.getElementById('edit-{{$reale_estate->id}}').submit();" type="submit" class="btn btn-success"><i class="fa fa-edit"> تعديل</i></button>
+                {{-- delete btn --}}
+                <button onclick="event.preventDefault();if(confirm('هل تريد فعلا حدف هذا العقار؟'))document.getElementById('delete-{{$reale_estate->id}}').submit();" type="submit" class="btn btn-danger"><i class="fa fa-trash"> حذف</i></button>
+
+            </td>
+          </tr>
+          <tr>
             <td>إسم صاحب العقار</td>
             <td>{{$reale_estate->name}}</td>
           </tr>

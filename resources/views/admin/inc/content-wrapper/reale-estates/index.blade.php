@@ -31,7 +31,8 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover" style="white-space: nowrap;">
               <tbody><tr>
-                <th>الرقم</th>
+                <th>#</th>
+                <th>رقم العقار</th>
                 <th>إسم صاحب العقار</th>
                 <th>هاتف صاحب العقار</th>
                 <th>نوع العقار</th>
@@ -55,6 +56,7 @@
               @if(count($reale_estates)>0)
               @foreach ($reale_estates as $index => $item)
               <tr>
+                <td>{{$index+1}}</td>
                 <td>{{$item->id}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->phone}}</td>
@@ -76,9 +78,9 @@
                 <td>{!!print_reale_estate_statu($item->id)!!}</td>
                 <td>
                   {{-- edite form --}}
-                  <form id="edit-{{$item->id}}"action="{{route('admin.reale_estate.edit',$item->id)}}" method="post">                    
+                  <form id="edit-{{$item->id}}"action="{{route('admin.reale_estate.edit',$item->id)}}" method="GET">                    
                   @csrf
-                  @method('PUT')
+                  @method('GET')
                   </form>
                   
                   {{-- delete form --}}
@@ -88,6 +90,8 @@
                   </form>
                   {{-- show details --}}
                   <a href="{{route('admin.reale_estate.detailes',$item->id)}}" class="btn btn-info"><i class="fa fa-info"> تفاصيل</i></a>
+                  {{-- edit reale estate images --}}
+                  <a href="{{route('admin.reale_estate.edit-reale-estate-images',$item->id)}}" class="btn btn-primary"><i class="fa fa-image"> تعديل  صور العقار</i></a>
                   {{-- edit btn --}}
                   <button onclick="document.getElementById('edit-{{$item->id}}').submit();" type="submit" class="btn btn-success"><i class="fa fa-edit"> تعديل</i></button>
                   {{-- delete btn --}}

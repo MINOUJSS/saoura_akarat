@@ -5,11 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Rules\ValidSelectBox;
 use App\RealEestate;
 use App\OrderToFindRealeEstate;
 use App\Images;
 use App\LikedList;
 use App\UnlikedList;
+use App\Tronsaction;
+use App\RealeEstateType;
+use App\Wilaya;
+use App\Rooms;
+use App\Etages;
+use App\Furnisheds;
+use App\Facads;
+use App\Bathes;
+use App\Property;
+use App\EtageNumber;
+use App\AdminNotification;
 use Auth;
 
 class RealeEstatesController extends Controller
@@ -95,14 +107,192 @@ class RealeEstatesController extends Controller
     public function edit($id)
     {
         $reale_estate=RealEestate::findOrfail($id);
-        return view('admin.reale-estates.edit.index');
+        $tronsaction=Tronsaction::all();
+        $reale_estate_types=RealeEstateType::all();
+        $wilayas=Wilaya::all();
+        $rooms=Rooms::all();
+        $etages=Etages::all();
+        $furnisheds=Furnisheds::all();
+        $facads=Facads::all();
+        $bathes=Bathes::all();
+        $properties=Property::all();
+        $etage_numbers=EtageNumber::all();
+        return view('admin.reale-estates.edit.index',compact('reale_estate','tronsaction','reale_estate_types','wilayas','rooms','etages','furnisheds','facads','bathes','properties','etage_numbers'));
     }
 
-    public function update($id)
+    public function update(Request $request,$id)
     {
-        dd('this is update function');
+        //dd(get_etage_number_from_id($request->etage_number));
+        /*::::::::::::::::::::::::::::::::::
+                      validation
+        ::::::::::::::::::::::::::::::::::*/
+        $this->validate($request,[
+            'name'=>'required',
+            'phone'=>'required',
+            'r_e_type'=>new ValidSelectBox
+        ]);
+        //r_e_type validation 
+        if($request->r_e_type == 1 || $request->r_e_type == 3)
+        {
+            $this->validate($request,[
+                'rooms'=>new ValidSelectBox,
+                'etage'=>new ValidSelectBox,
+                'furnished'=>new ValidSelectBox,
+                'bathes'=>new ValidSelectBox,
+                'properties'=>new ValidSelectBox
+            ]);
+        }elseif($request->r_e_type == 3)
+        {
+            $this->validate($request,[
+                'properties'=>new ValidSelectBox
+            ]);
+        }elseif($request->r_e_type == 2)
+        {
+            $this->validate($request,[
+                'facad'=>new ValidSelectBox,
+                'etage_number'=>new ValidSelectBox,
+                'furnished'=>new ValidSelectBox,
+                'bathes'=>new ValidSelectBox,
+                'properties'=>new ValidSelectBox
+            ]);
+        }elseif($request->r_e_type == 5)
+        {
+            $this->validate($request,[
+                'facad'=>new ValidSelectBox
+            ]);
+        }elseif($request->r_e_type == 6)
+        {
+            $this->validate($request,[
+                'etage'=>new ValidSelectBox,
+                'facad'=>new ValidSelectBox,
+                'etage_number'=>new ValidSelectBox
+            ]);
+        }
+        $this->validate($request,[
+            'tronsaction'=>new ValidSelectBox,
+            'wilaya'=>new ValidSelectBox,
+            'price'=>'required'
+            // 'files'=>'required',
+            // 'files.*'=>'image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2000000',
+            // 'contra' =>'required'
+        ]);
+        /*::::::::::::::::::::::::::::::::::
+                update data in data base 
+        :::::::::::::::::::::::::::::::::::*/
+        $reale_estate=RealEestate::findOrFail($id);
+        $reale_estate->name=$request->name;
+        $reale_estate->phone=$request->phone;
+        $reale_estate->type=get_reale_estate_type($request->r_e_type);
+        if($request->r_e_type == 1 || $request->r_e_type == 3)
+        {
+        $reale_estate->rooms=get_rooms_from_id($request->rooms);
+        $reale_estate->baths=get_bathes_from_id($request->bathes);
+        $reale_estate->etages=get_etages_from_id($request->etage);
+        $reale_estate->furnished=get_furnisheds_from_id($request->furnished);
+        $reale_estate->property=get_properies_from_id($request->properties);
+        }elseif($request->r_e_type == 2)
+        {
+        $reale_estate->facad=get_facads_from_id($request->facad);
+        $reale_estate->etage_number=get_etage_number_from_id($request->etage_number);
+        $reale_estate->furnished=get_furnisheds_from_id($request->furnished);
+        $reale_estate->baths=get_bathes_from_id($request->bathes);
+        $reale_estate->property=get_properies_from_id($request->properties);
+        }elseif($request->r_e_type == 3)
+        {
+            $reale_estate->property=get_properies_from_id($request->properties);
+        }elseif($request->r_e_type == 5)
+        {
+        $reale_estate->facad=get_facads_from_id($request->facad); 
+        }elseif($request->r_e_type == 6)
+        {
+        $reale_estate->etages=get_etages_from_id($request->etage);
+        $reale_estate->facad=get_facads_from_id($request->facad);
+        $reale_estate->etage_number=get_etage_number_from_id($request->etage_number);      
+        }
+        // $reale_estate->property=get_properies_from_id($request->properties);
+        $reale_estate->transaction=get_tronsactions_from_id($request->tronsaction);
+        //$reale_estate->garage=$request->garage;
+        $reale_estate->price=$request->price;
+        $reale_estate->wilaya=get_wilaya_name_from_id($request->wilaya);
+        if($request->dayra!=0)
+        {
+        $reale_estate->dayra=get_dayra_name_from_id($request->dayra);
+        }else
+        {
+            $reale_estate->dayra=Null;
+        }
+        if($request->baladia!=0)
+        {
+        $reale_estate->baladia=get_baladia_name_from_id($request->baladia);
+        }else
+        {
+            $reale_estate->baladia=Null;   
+        }
+        $reale_estate->address=$request->address;
+        $reale_estate->google_map_code=$request->google_map;
+        $reale_estate->description=$request->description;
+        $reale_estate->rolls=$request->rolls;
+        $reale_estate->update();
+
+        /*::::::::::::::::::::::::::::::::::::
+       Notificate Admin About This Reale Estate update
+        :::::::::::::::::::::::::::::::::::::*/
+        //auto select icon class for notification
+        if($reale_estate->type=='شقة')
+        {
+            $icon_class='fa fa-key';
+        }elseif($reale_estate->type=='ستيديو')
+        {
+            $icon_class='fa fa-building';
+        }elseif($reale_estate->type=='مزرعة')
+        {
+            $icon_class='fa fa-home';
+        }elseif($reale_estate->type=='أرض')
+        {
+            $icon_class='fa fa-map';
+        }elseif($reale_estate->type=='محل')
+        {
+            $icon_class='fa fa-shopping-cart';
+        }elseif($reale_estate->type=='مكتب')
+        {
+            $icon_class='fa fa-briefcase';
+        }else
+        {
+            $icon_class='fa fa-home';
+        }
+        //insert into admin_notification table
+        $note=new AdminNotification;
+        $note->icon_class=$icon_class;
+        $note->notification='قام'.Auth::guard('admin')->user()->name.' بتعديل عقار '.$reale_estate->transaction;
+        $note->link='default';
+        $note->type='reale_estate';
+        $note->save();
+        //update the rdirectecting link        
+        $up_note=AdminNotification::find($note->id);
+        $up_note->link=url('/admin/detailes/reale-estate/'.$reale_estate->id.'/'.$note->id.'');
+        $up_note->update();
+
+        /*::::::::::::::::::::::::::::::::::
+                   return back() with success
+        :::::::::::::::::::::::::::::::::::*/
+        Alert::success('تم تعديل العقار بنجاح');
+        return redirect()->back()->with('success','تم تعديل العقار بنجاح .');
+        //return redirect('admin.reale_estates');        
+
     }
 
+    public function edit_reale_estate_images()
+    {
+        return view('admin.reale-estates.edit-reale-estate-images.index');
+    }
+    public function update_reale_estate_images()
+    {
+        dd('progarme it now');
+    }
+    public function delete_image()
+    {
+        dd('progarme it now');
+    }
     public function destroy($id)
     {
         //delete all real estate images 
@@ -127,7 +317,7 @@ class RealeEstatesController extends Controller
         $reale_estate->delete();
         //return to reale estate page with success
         Alert::success('تم حدف العقار بنجاح');
-        return redirect()->back();
+        return redirect(route('admin.reale_estates'));
     }
 
     public function apartments()
