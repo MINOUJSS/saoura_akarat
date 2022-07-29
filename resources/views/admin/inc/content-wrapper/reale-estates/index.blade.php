@@ -15,7 +15,7 @@
     <section class="content">
 
       <!-- Your Page Content Here -->
-      <div class="col-xs-12">
+      {{-- <div class="col-xs-12"> --}}
         <div class="box">
           <div class="box-header">
             <h3 class="box-title">جدول العقارات</h3>
@@ -126,7 +126,7 @@
             </tbody></table>
           </div><!-- /.box-body -->
         </div><!-- /.box -->
-      </div>
+      {{-- </div> --}}
       <!-- end Page content-->
 
     </section><!-- /.content -->
