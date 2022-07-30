@@ -115,7 +115,7 @@
                 <td>{{$index+1}}</td>
                 <td>{{$image->id}}</td>
                 <td><img src="{{asset('/admins/uploads/thumbnails/'.$image->image)}}" alt="{{$image->image}}" height="50px" width="50px"></td>
-                <td>{{$image->created_at->diffForHumans()}}</td>
+                <td>@if($image->created_at!=Null){{$image->created_at->diffForHumans()}}@else{{$image->created_at}}@endif</td>
                 <td>
                   {{-- delete form --}}
                   <form id="delete-{{$image->id}}" action="{{route('admin.reale_estate.delete-images',$image->id)}}" method="POST" enctype="multipart/form-data">
