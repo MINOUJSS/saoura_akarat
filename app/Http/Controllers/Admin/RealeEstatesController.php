@@ -22,6 +22,7 @@ use App\Bathes;
 use App\Property;
 use App\EtageNumber;
 use App\AdminNotification;
+use Image;
 use Auth;
 
 class RealeEstatesController extends Controller
@@ -281,17 +282,114 @@ class RealeEstatesController extends Controller
 
     }
 
-    public function edit_reale_estate_images()
+    public function edit_reale_estate_images($id)
     {
-        return view('admin.reale-estates.edit-reale-estate-images.index');
+        $reale_estate=RealEestate::findOrfail($id);
+        $images=Images::where('reale_estate_id',$id)->get();
+        return view('admin.reale-estates.edit-reale-estate-images.index',compact('reale_estate','images'));
+    }
+    public function add_images_to_reale_estate(Request $request,$id)
+    {
+        $reale_estate=RealEestate::findOrFail($id);
+        /*::::::::::::::::::::::::::::::::::
+                      validation
+        :::::::::::::::::::::::::::::::::::*/
+        $this->validate($request,[
+            'files'=>'required',
+            'files.*'=>'image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2000000',
+        ]);
+
+        /*::::::::::::::::::::::::::::::::::
+                resize and upload images 
+        :::::::::::::::::::::::::::::::::::*/
+        if($request->file('files'))
+        {
+            $images=$request->file('files');            
+            foreach ($images as $index => $image) {
+                $image_name=$image->getClientOriginalName().'_'.md5(time()).'.'.$image->getClientOriginalExtension();
+                $distinationPath=public_path('/admins/uploads/thumbnails');
+                $resize_image=Image::make($image->getRealPath());
+                $resize_image->resize(600,600,function($constraint){
+                    $constraint->aspectRatio();
+                })->save($distinationPath.'/'.$image_name);
+
+                //$distinationPath=public_path('/admins/uploads/images');
+                //$image->move($distinationPath,$image_name);
+                
+                //insert image name to images tables
+                $n_image=new Images;
+                $n_image->reale_estate_id=$id;
+                $n_image->image=$image_name;
+                $n_image->index=$index;
+                $n_image->save();
+            }
+        }
+        /*::::::::::::::::::::::::::::::::::::
+       Notificate Admin About This new images
+        :::::::::::::::::::::::::::::::::::::*/
+        //auto select icon class for notification
+        if($reale_estate->type=='شقة')
+        {
+            $icon_class='fa fa-key';
+        }elseif($reale_estate->type=='ستيديو')
+        {
+            $icon_class='fa fa-building';
+        }elseif($reale_estate->type=='مزرعة')
+        {
+            $icon_class='fa fa-home';
+        }elseif($reale_estate->type=='أرض')
+        {
+            $icon_class='fa fa-map';
+        }elseif($reale_estate->type=='محل')
+        {
+            $icon_class='fa fa-shopping-cart';
+        }elseif($reale_estate->type=='مكتب')
+        {
+            $icon_class='fa fa-briefcase';
+        }else
+        {
+            $icon_class='fa fa-home';
+        }
+        //insert into admin_notification table
+        $note=new AdminNotification;
+        $note->icon_class=$icon_class;
+        $note->notification='قام '.Auth::guard('admin')->user()->name.' بإضافة صور جديدة للعقار رقم : '.$id;
+        $note->link='default';
+        $note->type='reale_estate';
+        $note->save();
+        //update the rdirectecting link        
+        $up_note=AdminNotification::find($note->id);
+        $up_note->link=url('/admin/detailes/reale-estate/'.$id.'/'.$note->id.'');
+        $up_note->update();
+        //success Alert and Redirect
+        Alert::success('تم إضافة الصورة بنجاح');
+        return redirect()->back();
     }
     public function update_reale_estate_images()
     {
         dd('progarme it now');
     }
-    public function delete_image()
+    public function delete_image($id)
     {
-        dd('progarme it now');
+     //delete image from folder
+     $image=Images::findOrFail($id);
+            //delete from thumbnails folder
+            $thumbnail_path=public_path('/admins/uploads/thumbnails/'.$image->image);
+            if(\File::exists($thumbnail_path))
+            {
+                unlink($thumbnail_path);
+            }
+            //delete from images table
+            $image_path=public_path('/admins/uploads/images/'.$image->image);
+            if(\File::exists($image_path))
+            {
+                unlink($image_path);
+            }
+     //delete image form database
+     $image->delete();
+     //success alert and redirect
+     Alert::success('تم حدف الصورة بنجاح');
+     return redirect()->back();
     }
     public function destroy($id)
     {

@@ -49,10 +49,12 @@ Route::prefix('admin')->group(function(){
     Route::post('/update/reale-estate/{id}','Admin\RealeEstatesController@update')->name('admin.reale_estate.update');
     //edit  reale estate images
     Route::get('/edite-images/reale-estate/{id}','Admin\RealeEstatesController@edit_reale_estate_images')->name('admin.reale_estate.edit-reale-estate-images');
+    // add image or multiple images to reale estate
+    Route::post('/add-images/reale-estate/{id}','Admin\RealeEstatesController@add_images_to_reale_estate')->name('admin.reale_estate.add-images-to-reale-estate');
     // update reale estate images
     Route::post('/update-images/reale-estate/{id}','Admin\RealeEstatesController@update_reale_estate_images')->name('admin.reale_estate.update-reale-estate-images');
     // delete reale esate image
-    Route::get('/delete-image/image/{id}','Admin\RealeEstatesController@delete_image')->name('admin.reale_estate.delete-images');
+    Route::delete('/delete-image/image/{id}','Admin\RealeEstatesController@delete_image')->name('admin.reale_estate.delete-images');
     //------ Reale Estate Type Route
     //apartments
     Route::get('/reale-estate/type/apartments','Admin\RealeEstatesController@apartments')->name('admin.reale-estate.type.apartments');

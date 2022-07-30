@@ -81,6 +81,8 @@
                   </form>
                 {{-- edit btn --}}
                 <button onclick="document.getElementById('edit-{{$reale_estate->id}}').submit();" type="submit" class="btn btn-success"><i class="fa fa-edit"> تعديل</i></button>
+                {{-- edit reale estate images --}}
+                <a href="{{route('admin.reale_estate.edit-reale-estate-images',$reale_estate->id)}}" class="btn btn-primary"><i class="fa fa-image"> تعديل  صور العقار</i></a>
                 {{-- delete btn --}}
                 <button onclick="event.preventDefault();if(confirm('هل تريد فعلا حدف هذا العقار؟'))document.getElementById('delete-{{$reale_estate->id}}').submit();" type="submit" class="btn btn-danger"><i class="fa fa-trash"> حذف</i></button>
 
@@ -161,6 +163,10 @@
           <tr>
             <td>شروط الكراء أو البيع</td>
             <td>{{$reale_estate->rolls}}</td>
+          </tr>
+          <tr>
+            <td>رابط صور العقار</td>
+            <td><a href="{{route('site.reale_estate.photos',$reale_estate->id)}}" target="_blank" rel="noopener noreferrer">الصور</a></td>
           </tr>
         </table>
       </div>

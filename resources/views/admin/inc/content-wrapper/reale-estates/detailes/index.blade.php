@@ -168,6 +168,10 @@
               <td>شروط الكراء أو البيع</td>
               <td>{{$reale_estate->rolls}}</td>
             </tr>
+            <tr>
+              <td>رابط صور العقار</td>
+              <td><a href="{{route('site.reale_estate.photos',$reale_estate->id)}}" target="_blank" rel="noopener noreferrer"></a></td>
+            </tr>
           </table>
         </div>
       </div>
