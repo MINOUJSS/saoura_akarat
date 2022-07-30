@@ -166,7 +166,7 @@
           </tr>
           <tr>
             <td>رابط صور العقار</td>
-            <td><a href="{{route('site.reale_estate.photos',$reale_estate->id)}}" target="_blank" rel="noopener noreferrer">الصور</a></td>
+            <td><a href="{{route('site.reale_estate.photos',$reale_estate->id)}}" target="_blank" rel="noopener noreferrer">إضغط هنا للإنتقال لصفحة صور العقار</a></td>
           </tr>
         </table>
       </div>

@@ -327,7 +327,7 @@
                           <div class="col-12" style="margin:5px;">
                             <div class="form-group {{$errors->has('contra')? 'has-error':''}}">
                               <input type="checkbox" name="contra">
-                              <label for="contra" style="color:#ffffff">موافق على جميع<a href="#"> شروط الإستخدام</a> للموقع</label>
+                              <label for="contra" style="color:#ffffff">موافق على جميع<a href{{route('site.contra')}} شروط الإستخدام</a> للموقع</label>
                               @if($errors->has('contra'))
                               <span class="help-block">
                               {{ $errors->first('contra')}}
