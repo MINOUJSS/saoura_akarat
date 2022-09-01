@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-lg-6">
         <!--start-->
-        <div class="box box-solid">
+        <div class="box box-solid box-success">
           <div class="box-header with-border">
           <h3 class="box-title">العقارات التي أعجبته</h3>          
         </div><!-- /.box-header -->
@@ -143,7 +143,7 @@
       </div>
       <!--end-->
       <!--start-->
-      <div class="box box-solid">
+      <div class="box box-solid box-danger">
         <div class="box-header with-border">
         <h3 class="box-title">العقارات التي لم تعجبه</h3>
         </div><!-- /.box-header -->
@@ -276,6 +276,26 @@
       
         <!-- Table -->
         <table class="table">
+          <tr>
+            <td>عمليات على الطلب</td>
+            <td>
+              @if(order_to_find_has_operation($ordertofind->id))
+              {{-- reset reale estate statu form --}}
+              <form id="reset-{{$ordertofind->id}}" action="{{route('admin.operation.destroy',$ordertofind->operation->id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                </form>
+              {{-- reset btn --}}
+              <button onclick="event.preventDefault();if(confirm('هل تريد فعلا إنهاء عقد الكراء؟ ,سيتم حذف معلومات الطالب و العقد'))document.getElementById('reset-{{$ordertofind->id}}').submit();" type="submit" class="btn btn-danger"><i class="fa fa-stop"> إنهاءالعقد</i></button>
+            @endif
+            {{-- delete form --}}
+            <form id="delete-{{$ordertofind->id}}" action="{{route('admin.orders.to.find.delete',$ordertofind->id)}}" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('DELETE')
+            </form>
+              {{-- delete btn --}}
+              <button onclick="event.preventDefault();if(confirm('هل تريد فعلا حدف هذا الطلب؟...سيتم حذف الطلب و كل العمليات الخاصة بهذا العقل.'))document.getElementById('delete-{{$ordertofind->id}}').submit();" type="submit" class="btn btn-danger"><i class="fa fa-trash"> حذف</i></button>
+            </td>
+          </tr>
           <tr>
             <td>إسم طالب العقار</td>
             <td>{{$ordertofind->name}}</td>

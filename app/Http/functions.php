@@ -547,9 +547,12 @@ function print_reale_estate_statu($id)
  }elseif($reale_estate->statu==4)
  {
     $html='<span class="label label-success">تم البيع</span>';
- }else
+ }elseif($reale_estate->statu==5)
  {
     $html='<span class="label label-success">تم التبديل</span>';
+ }else
+ {
+    $html='<span class="label label-danger">إنتهى عقد الإيجار</span>';
  }
  return $html;
 }
@@ -575,9 +578,12 @@ function print_order_to_find_statu($id)
  }elseif($order_to_find->statu==5)
  {
     $html='<span class="label label-success">قام بالتبديل</span>';
- }else
+ }elseif($order_to_find->statu==6)
  {
     $html='<span class="label label-warning">قيد البحث</span>';  
+ }else
+ {
+    $html='<span class="label label-danger">إنتهى عقد الإيجار</span>';
  }
  return $html;
 }
@@ -617,7 +623,28 @@ function count_bereaux()
     $reale_estate=App\RealEestate::where('type','مكتب')->get();
     return count($reale_estate);
 }
-//
+//--------end of operation--------
+function is_end_of_rent($operation_id)
+{
+    $now=new DateTime();
+    $operation=App\Operation::findOrFail($operation_id);
+    $exp_date=new DateTime($operation->exp_date.' 23:59:59');
+    if($exp_date >= $now)
+    {
+        $interval=$now->diff($exp_date);
+        $dif_date = $interval->format('%d');   
+    }else
+    {
+        $dif_date='0';
+    }
+    if($operation->transaction=='كراء' && $dif_date == 0 )
+    {
+    return false;
+    }else
+    {
+    return true;
+    }
+}
 /*:::::::::::::::::::::::::::::::::::::::::::::::::
                 Site functions
 ::::::::::::::::::::::::::::::::::::::::::::::::::*/

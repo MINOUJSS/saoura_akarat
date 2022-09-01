@@ -4,6 +4,14 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Notifications\NotificationSender;
+use Illuminate\Notifications\RoutesNotifications;
+use App\Notifications\NewOrderToFindRealeEstate;
+use App\Admin;
+use App\Operation;
+use App\OrderToFindRealeEstate; 
+use App\RealEestate;
+use App\AdminNotification;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,7 +32,62 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        //$schedule->command('inspire')->hourly();
+
+        //مراقبة يومية للزبائن الذين قاموا بكراء عقارات
+        $schedule->call(function(){
+        //get ended renting
+        $operations=Operation::all();
+        foreach ($operations as $operation) {            
+            //get order  data
+            $order=OrderToFindRealeEstate::findOrFail($operation->order_id);
+            if(is_end_of_rent($operation->id)==false && $order->statu ==3)
+            {            
+                //informe admine aboute this end
+                //insert into admin_notification table
+        $note=new AdminNotification;
+        $note->icon_class="fa fa-user";
+        $note->notification='إنتهى عقد الإيجار لـ:'.$order->name;
+        $note->link='default';
+        $note->type='order';
+        $note->save();
+        //update the rdirectecting link
+        $up_note=AdminNotification::find($note->id);
+        $up_note->link=route('admin.reale_estate.order.to.find.notification.detailes',[$order->id,$note->id]);
+        $up_note->update();
+        //  change order statu
+        $order->statu=7;
+        $order->update();
+        // change reale estate statu
+        $reale_estate=RealEestate::findORFail($operation->reale_estate_id);
+        $reale_estate->statu=7;
+        $reale_estate->update();
+        //sendding email notifications to admins
+        $note_data=[
+            'body'=>$note->notification,
+            'action'=>'مشاهدة التفاصيل',
+            'url'=>route('admin.reale_estate.order.to.find.notification.detailes',[$order->id,$note->id]),
+            'footer'=>'الساورة للعقارات.'
+        ];
+
+        $admins=Admin::where('type',1)->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new NewOrderToFindRealeEstate($note_data));
+        }
+
+            }
+        }    
+    })->daily()->runInBackground();
+        // مراقبة الحجز المؤقت للعقارات 
+
+        // مراقبة الحجز بعربون
+
+        //رفع تقرير أسبوعي عن الأرباح
+
+        //رفع تقرير شهري عن الأرباح
+
+        //رفع تقرير سنوي عن الأرباح
+
     }
 
     /**

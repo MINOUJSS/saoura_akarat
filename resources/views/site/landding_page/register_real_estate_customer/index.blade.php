@@ -83,7 +83,7 @@
                         <input type="hidden" name="h_rooms" id="h_rooms" value="@if(old('rooms')!=0) {{old('rooms')}} @else {{'0'}} @endif">
                       </div>
 
-                      <div class="studio_option shop_option apartment_option form-group {{$errors->has('etage')? 'has-error' : ''}}" style="margin:5px;@if(old('r_e_type')!=1 && old('r_e_type')!=3 && old('r_e_type')!=6){{'display:none'}}@endif">
+                      <div class="studio_option shop_option apartment_option bereau_option form-group {{$errors->has('etage')? 'has-error' : ''}}" style="margin:5px;@if(old('r_e_type')!=1 && old('r_e_type')!=3 && old('r_e_type')!=6){{'display:none'}}@endif">
                         <label class="sr-only" for="etage">الطابق</label>
                         <select name="etage" class="form-control transparent" name="etage" id="etage">
                           <option value="0" class="form-control" @if(old('etage')==0){{"selected"}}@endif>إختر الطابق *</option>

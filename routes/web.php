@@ -39,6 +39,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/reale-estates','Admin\RealeEstatesController@index')->name('admin.reale_estates');
     //detailes
     Route::get('/detailes/reale-estate/{id}','Admin\RealeEstatesController@detailes')->name('admin.reale_estate.detailes');
+    //make notification readed
+    Route::get('/notification/meke-readed/{note_id}','Admin\OrderToFindRealeEstateController@make_note_readed')->name('admin.notification.make.readed');
     //notification detailes
     Route::get('/detailes/reale-estate/{id}/{note_id}','Admin\RealeEstatesController@notification_detailes')->name('admin.reale_estate.notification.detailes');
     //delete
@@ -78,6 +80,8 @@ Route::prefix('admin')->group(function(){
     //--------order to find reale estates routes
     //index
     Route::get('/reale-estate/all-orders-to-find','Admin\OrderToFindRealeEstateController@index')->name('admin.reale_estate.all.orders.to.find');
+    //destroy
+    Route::delete('/orders-to-find/delete/{id}','Admin\OrderToFindRealeEstateController@destroy')->name('admin.orders.to.find.delete');
     //notification detailes
     Route::get('/reale-estate/order-to-find/{id}/{note_id}','Admin\OrderToFindRealeEstateController@notification_detailes')->name('admin.reale_estate.order.to.find.notification.detailes');
     //detailes
@@ -103,7 +107,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/operations/store','Admin\OperationsController@store')->name('admin.operation.store');
     Route::post('/operations/edit','Admin\OperationsController@edit')->name('admin.operation.edit');
     Route::post('/operations/update','Admin\OperationsController@update')->name('admin.operation.update');
-    Route::get('/operations/destroy/{id}','Admin\OperationsController@destroy')->name('admin.operation.destroy');
+    Route::post('/operations/destroy/{id}','Admin\OperationsController@destroy')->name('admin.operation.destroy');
 });
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::

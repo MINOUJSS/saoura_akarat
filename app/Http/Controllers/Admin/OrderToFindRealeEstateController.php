@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\AdminNotification;
 use App\OrderToFindRealeEstate;
 use App\RealEestate;
 use App\LikedList;
@@ -29,6 +30,16 @@ class OrderToFindRealeEstateController extends Controller
         return view('admin.order-to-find-reale-estate.index',compact('orders_to_find'));
     }
 
+    public function make_note_readed($note_id)
+    {
+        //make notification readed
+        if(!is_readed_notification(Auth::guard('admin')->user()->id,$note_id))
+        {
+            notification_readed($note_id);
+        }
+        //redirect
+        return redirect()->back();
+    }
     public function notification_detailes($id,$note_id)
     {
         //make notification readed
@@ -152,5 +163,32 @@ class OrderToFindRealeEstateController extends Controller
         //retutn to back
         Alert::success('تم إضافة العقار إلى قائمة العقارات التي لم تعجب الطالب');
         return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        //get the order
+       $order=OrderToFindRealeEstate::findOrFail($id);
+       //if hase operation insert to archive
+
+        //delete order
+        $order->delete();
+        //alert success
+        Alert::success('تم حذف الطلب بنجاح');
+        //insert into admin_notification table
+        $note=new AdminNotification;
+        $note->icon_class='fa fa-user';
+        $note->notification='قام '.Auth::guard('admin')->user()->name.' بحذف طلب  الزبون '.$order->name;
+        $note->link='default';
+        $note->type='order';
+        $note->save();
+        //update the rdirectecting link        
+        $up_note=AdminNotification::find($note->id);
+        $up_note->link=route('admin.notification.make.readed',$note->id);
+        //$up_note->link=url('/admin/reale-estate/order-to-find/'.$order_to_find->id);
+        $up_note->update();
+
+        //redirect to orders list
+        return redirect(route('admin.reale_estate.all.orders.to.find'));
     }
 }

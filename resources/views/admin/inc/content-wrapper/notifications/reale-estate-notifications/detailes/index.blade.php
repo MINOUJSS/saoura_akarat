@@ -175,7 +175,7 @@
     <div class="row">
       <div class="col-md-6">
         <!--start-->
-      <div class="box box-solid">
+      <div class="box box-solid box-success">
         <div class="box-header with-border">
         <h3 class="box-title">الزبائن الذين أعجبهم هذا العقار</h3>          
       </div><!-- /.box-header -->
@@ -277,7 +277,7 @@
       </div>
       <div class="col-md-6">
         <!--start-->
-    <div class="box box-solid">
+    <div class="box box-solid box-danger">
       <div class="box-header with-border">
       <h3 class="box-title">الزبائن الذين لم يعجبهم هذا العقار</h3>
       </div><!-- /.box-header -->

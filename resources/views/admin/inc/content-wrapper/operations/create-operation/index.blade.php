@@ -58,7 +58,7 @@
               {{$reale_estate->type}}
               @if($reale_estate->rooms!=null){{$reale_estate->rooms}}@endif
               @if($reale_estate->etages!=null)في {{$reale_estate->etages}}@endif
-              @if($reale_estate->etage_number!=null) ب{{$reale_estate->etage_number}}@endif
+              @if($reale_estate->etage_number!=null) بـ {{'('.$reale_estate->etage_number.') طابق, '}}@endif
               @if($reale_estate->facad!=null) ب{{$reale_estate->facad}}@endif
               @if($reale_estate->furnished!=null) {{$reale_estate->furnished}}ة@endif
               @if($reale_estate->baths!=null) عدد الحمامات ({{$reale_estate->baths}})@endif

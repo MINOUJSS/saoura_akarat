@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-lg-6">
         <!--start-->
-        <div class="box box-solid">
+        <div class="box box-solid box-success">
           <div class="box-header with-border">
           <h3 class="box-title">العقارات التي أعجبته</h3>          
         </div><!-- /.box-header -->
@@ -144,7 +144,7 @@
       </div>
       <!--end-->
       <!--start-->
-      <div class="box box-solid">
+      <div class="box box-solid box-danger">
         <div class="box-header with-border">
         <h3 class="box-title">العقارات التي لم تعجبه</h3>
         </div><!-- /.box-header -->

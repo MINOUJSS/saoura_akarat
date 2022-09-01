@@ -9,6 +9,8 @@ use App\RealEestate;
 use App\OrderToFindRealeEstate;
 use App\Operation;
 use App\Invoice;
+use App\AdminNotification;
+use Auth;
 
 class OperationsController extends Controller
 {
@@ -29,14 +31,14 @@ class OperationsController extends Controller
     //create
     public function create(Request $request)
     {
-        //grt reale estate id
+        //get reale estate id
         $r_e_id=$request->r_estate_id;
         //get order to find reale estate id
         $order_id=$request->order_id;
         //get reale estate data
         $reale_estate=RealEestate::findOrFail($r_e_id);
         //get order data
-        $order_to_find_r_e=RealEestate::findOrFail($order_id);
+        $order_to_find_r_e=OrderToFindRealeEstate::findOrFail($order_id);
         //return create view with this data
         return view('admin.operations.create-operation.index',compact('reale_estate','order_to_find_r_e'));
     }
@@ -45,7 +47,7 @@ class OperationsController extends Controller
     {
         //dd($request);
         //validate data
-        if($request->transaction)
+        if($request->transaction==2)
         {
             if($request->exp_date==null){
                 $exp_date=date('Y-m-d H:i:s');
@@ -76,12 +78,15 @@ class OperationsController extends Controller
         if($request->transaction=='للكراء')
         {
             $operation->transaction='كراء';
+            $client_operation='كراء';
         }elseif($request->transaction=='للبيع')
         {
             $operation->transaction='بيع';
+            $client_operation='شراء';
         }else
         {
             $operation->transaction='تبديل';
+            $client_operation='تبديل';
         }
         $operation->exp_date=$request->exp_date;
         $operation->save();
@@ -119,6 +124,18 @@ class OperationsController extends Controller
         $order_to_find->update();
         //alert success
         Alert::success('تم إضافة عملية بنجاح');
+        //insert into admin_notification table
+        $note=new AdminNotification;
+        $note->icon_class='fa fa-dolar';
+        $note->notification='قام '.$order_to_find->name.' ب'.$client_operation.' عقار';
+        $note->link='default';
+        $note->type='reale_estate';
+        $note->save();
+        //update the rdirectecting link        
+        $up_note=AdminNotification::find($note->id);
+        $up_note->link=url('/admin/reale-estate/order-to-find/'.$order_to_find->id.'/'.$note->id);
+        $up_note->update();
+
 
         //redirect to order to find reale estate list
         return redirect(route('admin.reale_estate.all.orders.to.find'));
@@ -133,7 +150,7 @@ class OperationsController extends Controller
         //get reale estate data
         $reale_estate=RealEestate::findOrFail($r_e_id);
         //get order data
-        $order_to_find_r_e=RealEestate::findOrFail($order_id);
+        $order_to_find_r_e=OrderToFindRealeEstate::findOrFail($order_id);
         //get exp_date
         $operation=Operation::where('reale_estate_id',$r_e_id)->where('order_id',$order_id)->first();
         $exp_date=$operation->exp_date;
@@ -147,7 +164,7 @@ class OperationsController extends Controller
     public function update(Request $request)
     {
         //validate data
-        if($request->transaction)
+        if($request->transaction==2)
         {
             if($request->exp_date==null){
                 $exp_date=date('Y-m-d H:i:s');
@@ -180,12 +197,15 @@ class OperationsController extends Controller
         if($request->transaction=='للكراء')
         {
             $operation->transaction='كراء';
+            $client_operation='كراء';
         }elseif($request->transaction=='للبيع')
         {
             $operation->transaction='بيع';
+            $client_operation='شراء';
         }else
         {
             $operation->transaction='تبديل';
+            $client_operation='تبديل';
         }
         $operation->exp_date=$request->exp_date;
         $operation->update();
@@ -226,6 +246,18 @@ class OperationsController extends Controller
         $order_to_find->update();
         //alert success
         Alert::success('تم تعديل العملية بنجاح');
+        //insert into admin_notification table
+        $note=new AdminNotification;
+        $note->icon_class='fa fa-dolar';
+        $note->notification='قام '.Auth::guard('admin')->user()->name.' بتعديل عملية '.$client_operation.' عقار للزبون '.$order_to_find->name;
+        $note->link='default';
+        $note->type='reale_estate';
+        $note->save();
+        //update the rdirectecting link        
+        $up_note=AdminNotification::find($note->id);
+        $up_note->link=route('admin.reale_estate.order.to.find.notification.detailes',[$order_to_find->id,$note->id]);
+        //$up_note->link=url('/admin/reale-estate/order-to-find/'.$order_to_find->id);
+        $up_note->update();
 
         //redirect to order to find reale estate list
         return redirect(route('admin.reale_estate.all.orders.to.find'));
@@ -233,9 +265,37 @@ class OperationsController extends Controller
     //destroy
     public function destroy($id)
     {
-        //
+        //get operation data
         $operation=Operation::findOrFail($id);
-        $operation->delete();
+        //get reale estate
+        $reale_estate=RealEestate::findOrFail($operation->Reale_Estate->id);
+        //cahnge reale estate statu
+        $reale_estate->statu=0;
+        $reale_estate->update();
+        //get order data
+        $order_id=$operation->Order->id;
+        $order=OrderToFindRealeEstate::findOrFail($order_id);
+        //delete order
+        $order->delete();
+        //delete operation
+        //$operation->delete();
+        //alert success
+        Alert::success('تم إنهاء العقد بنجاح');
+        //insert into admin_notification table
+        $note=new AdminNotification;
+        $note->icon_class='fa fa-dolar';
+        $note->notification='قام '.Auth::guard('admin')->user()->name.' بإنهاء عقد '.$operation->transaction.' للزبون '.$order->name;
+        $note->link='default';
+        $note->type='order';
+        $note->save();
+        //update the rdirectecting link        
+        $up_note=AdminNotification::find($note->id);
+        $up_note->link=route('admin.reale_estate.all.orders.to.find');
+        //$up_note->link=url('/admin/reale-estate/order-to-find/'.$order_to_find->id);
+        $up_note->update();
+        //redirect
+        return redirect(route('admin.reale_estate.all.orders.to.find'));
+
     }
     
 }

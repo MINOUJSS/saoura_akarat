@@ -134,6 +134,12 @@ class RealEstateCustomerController extends Controller
                 'etage_number'=>new ValidSelectBox
             ]);
         }
+        elseif($request->r_e_type == 7)
+        {
+            $this->validate($request,[
+                'etage'=>new ValidSelectBox,
+            ]);
+        }
         $this->validate($request,[
             'tronsaction'=>new ValidSelectBox,
             'wilaya'=>new ValidSelectBox,
@@ -172,6 +178,10 @@ class RealEstateCustomerController extends Controller
         $reale_estate->etages=get_etages_from_id($request->etage);
         $reale_estate->facad=get_facads_from_id($request->facad);
         $reale_estate->etage_number=get_etage_number_from_id($request->etage_number);      
+        }
+        elseif($request->r_e_type == 7)
+        {
+        $reale_estate->etages=get_etages_from_id($request->etage);     
         }
         // $reale_estate->property=get_properies_from_id($request->properties);
         $reale_estate->transaction=get_tronsactions_from_id($request->tronsaction);
@@ -233,7 +243,7 @@ class RealEstateCustomerController extends Controller
         //send email notification
         $note_data=[
             'body'=>$note->notification,
-            'action'=>'مشاهدة العقار',
+            'action'=>'مشاهدة الطلب',
             'url'=>url('/admin/reale-estate/order-to-find/'.$reale_estate->id.'/'.$note->id),
             'footer'=>'الساورة للعقارات.'
         ];

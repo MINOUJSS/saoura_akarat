@@ -80,6 +80,9 @@ function real_estate_detector()
     }else if(type==6)
     {
         show_shop()
+    }else if(type==7)
+    {
+        show_bereau()
     }else
     {
         //hide all options
@@ -133,7 +136,14 @@ function show_shop()
     //show option for apartment
     $('.shop_option').show();  
 }
-
+//function to show Shop option
+function show_bereau()
+{
+    //hide all options
+    hide_all_real_estate_options();
+    //show option for apartment
+    $('.bereau_option').show();  
+}
 function hide_all_real_estate_options()
 {
     $('.apartment_option').hide(); 
@@ -142,6 +152,7 @@ function hide_all_real_estate_options()
     $('.farm_option').hide();
     $('.land_option').hide();
     $('.shop_option').hide();
+    $('.bereau_option').hide();
 }
 // function show_old_options()
 // {
