@@ -21,7 +21,7 @@
           <div class="col-xs-12">
             <h2 class="page-header">
               <i class="fa fa-globe"></i> إضافة عملية.
-              <small class="pull-left">التاريخ: {{date('m-d-Y')}}</small>
+              <small class="pull-left">التاريخ: {{date('d-m-Y')}}</small>
             </h2>
           </div><!-- /.col -->
         </div>

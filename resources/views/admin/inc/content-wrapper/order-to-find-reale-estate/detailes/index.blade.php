@@ -109,6 +109,48 @@
                 {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
                 @endif
                 <!---->
+                <!--add free reservation-->
+                @if(reale_estate_has_free_reservation($item->id))                
+                <form id="free_edit_form_{{$item->id}}" action="{{route('admin.free.reservation.edit')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$item->id}}">
+                  <input type="hidden" name="order_id" value="{{$ordertofind->id}}">
+                  {{-- <input type="submit" class="btn btn-warning" value="تعديل عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('free_edit_form_{{$item->id}}').submit();" class="btn btn-warning operation-btn"> تعديل الحجز المجاني</button>
+                {{-- <a href="{{route('admin.operation.edit',$item->id)}}" class="btn btn-warning">تعديل عملية</a> --}}
+                @else 
+                <form id="free_create_form_{{$item->id}}" class="form-group" action="{{route('admin.free.reservation.create')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$item->id}}">
+                  <input type="hidden" name="order_id" value="{{$ordertofind->id}}">
+                  {{-- <input type="submit" class="btn btn-info" value="إضافة عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('free_create_form_{{$item->id}}').submit();" class="btn btn-info operation-btn"> إضافة حجز مجاني</button>
+                {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
+                @endif
+                <!--end add free resaervation-->
+                <!--add paied reservation-->
+                @if(reale_estate_has_paied_reservation($item->id))                
+                <form id="paied_edit_form_{{$item->id}}" action="{{route('admin.paied.reservation.edit')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$item->id}}">
+                  <input type="hidden" name="order_id" value="{{$ordertofind->id}}">
+                  {{-- <input type="submit" class="btn btn-warning" value="تعديل عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('paied_edit_form_{{$item->id}}').submit();" class="btn btn-warning operation-btn"> تعديل الحجز المدفوع</button>
+                {{-- <a href="{{route('admin.operation.edit',$item->id)}}" class="btn btn-warning">تعديل عملية</a> --}}
+                @else 
+                <form id="paied_create_form_{{$item->id}}" class="form-group" action="{{route('admin.paied.reservation.create')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="r_estate_id" value="{{$item->id}}">
+                  <input type="hidden" name="order_id" value="{{$ordertofind->id}}">
+                  {{-- <input type="submit" class="btn btn-info" value="إضافة عملية"> --}}
+                </form>
+                <button onclick="document.getElementById('paied_create_form_{{$item->id}}').submit();" class="btn btn-info operation-btn"> إضافة حجز مدفوع</button>
+                {{-- <a href="{{route('admin.operation.create',$item->id)}}" class="btn btn-info">إضافة عملية</a> --}}
+                @endif
+                <!--end add paied resaervation-->
               </td>
               </tr>
               @endforeach  

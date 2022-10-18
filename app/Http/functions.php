@@ -517,6 +517,16 @@ function reale_estate_has_operation($id)
       return false;
     }
 }
+// 
+function reale_estate_has_free_reservation($id)
+{
+ return false;
+}
+// 
+function reale_estate_has_paied_reservation($id)
+{
+ return false;
+}
 //
 function order_to_find_has_operation($id)
 {

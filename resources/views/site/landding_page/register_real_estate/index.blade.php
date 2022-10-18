@@ -274,26 +274,7 @@
                         </span>
                         @endif
                       </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group {{($errors->has('files') || $errors->has('files.*') )? 'has-error':''}}" style="margin:5px;">
-                            {{-- <input name="file" type="text" class="form-control transparent" placeholder="أدخل السعر الذي تريده في الشهر في حالة الكراء و سعر المطلوب في حالة البيع *"> --}}
-                            <input class="form-control transparent" type="file" name="files[]" multiple id="files" accept="image/*">
-                            <label class="btn btn-warning file-lable" for="files"><i class="fa fa-image"> إختر صور للعقار</i></label>
-                            @if($errors->has('files'))
-                            <span class="help-block">
-                              {{$errors->first('files')}}
-                            </span>
-                            @endif
-                            @if($errors->has('files.*'))
-                            <span class="help-block">
-                              {{$errors->first('files.*')}}
-                            </span>
-                            @endif
-                          </div>
-                        </div>
-                        
-                      </div>
+                      
                       <div class="row">
                         <div class="col-md-12">
                         <div class="form-group {{$errors->has('google_map')? 'has-error':''}}"  style="margin:5px;">
@@ -327,6 +308,27 @@
                           </div>
                       
                       </div>
+
+                      {{-- <div class="row"> --}}
+                        <div class="col-md-12">
+                          <div class="form-group {{($errors->has('files') || $errors->has('files.*') )? 'has-error':''}}" style="margin:5px;">
+                            {{-- <input name="file" type="text" class="form-control transparent" placeholder="أدخل السعر الذي تريده في الشهر في حالة الكراء و سعر المطلوب في حالة البيع *"> --}}
+                            <input type="file" name="files[]" multiple id="files" accept="image/*" data-max-files="10" required>
+                            {{-- <label class="btn btn-warning file-lable" for="files"><i class="fa fa-image"> إختر صور للعقار</i></label> --}}
+                            @if($errors->has('files'))
+                            <span class="help-block">
+                              {{$errors->first('files')}}
+                            </span>
+                            @endif
+                            @if($errors->has('files.*'))
+                            <span class="help-block">
+                              {{$errors->first('files.*')}}
+                            </span>
+                            @endif
+                          </div>
+                        </div>          
+                      {{-- </div> --}}
+
                       <div class="col-12" style="margin:5px; padding-right:15px;">
                         <div class="form-group {{$errors->has('contra')? 'has-error':''}}">
                           <input type="checkbox" name="contra">
@@ -338,7 +340,9 @@
                           @endif
                         </div>
                       </div>
-                      </div>                           
+                      </div>
+                                            
+                      
                       <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">

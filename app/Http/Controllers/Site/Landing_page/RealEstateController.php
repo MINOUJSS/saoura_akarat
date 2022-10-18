@@ -8,6 +8,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Notifications\NotificationSender;
 use Illuminate\Notifications\RoutesNotifications;
 use App\Notifications\NewRealeEstateNotification;
+use App\Jobs\RealeEstateImageUploader;
 use App\Admin;
 use App\Tronsaction;
 use App\RealeEstateType;
@@ -23,6 +24,7 @@ use App\Property;
 use App\EtageNumber;
 use App\RealEestate;
 use App\Images;
+use App\TmpImages;
 use App\AdminNotification;
 use Image;
 use App\Rules\ValidSelectBox;
@@ -96,8 +98,8 @@ class RealEstateController extends Controller
             'tronsaction'=>new ValidSelectBox,
             'wilaya'=>new ValidSelectBox,
             'price'=>'required',
-            'files'=>'required',
-            'files.*'=>'image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2000000',
+            // 'files'=>'required',
+            // 'files.*'=>'image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2000000',
             'contra' =>'required'
         ]);
         /*::::::::::::::::::::::::::::::::::
@@ -155,28 +157,53 @@ class RealEstateController extends Controller
         /*::::::::::::::::::::::::::::::::::
                 resize and upload images 
         :::::::::::::::::::::::::::::::::::*/
-        if($request->file('files'))
-        {
-            $images=$request->file('files');
-            foreach ($images as $index => $image) {
-                $image_name=md5(time()).'.'.$image->getClientOriginalExtension();
-                $distinationPath=public_path('/admins/uploads/thumbnails');
-                $resize_image=Image::make($image->getRealPath());
-                $resize_image->resize(600,600,function($constraint){
-                    $constraint->aspectRatio();
-                })->save($distinationPath.'/'.$image_name);
 
-                //$distinationPath=public_path('/admins/uploads/images');
-                //$image->move($distinationPath,$image_name);
-                
-                //insert image name to images tables
-                $image=new Images;
-                $image->reale_estate_id=$reale_estate->id;
-                $image->image=$image_name;
-                $image->index=$index;
-                $image->save();
-            }
+        //get tmp images of this reale estate
+        $tmp_images=TmpImages::all();
+        foreach($tmp_images as $index=>$image)
+        {
+            //         //insert image name to images tables
+                $Image=new Images;
+                $Image->reale_estate_id=$reale_estate->id;
+                $Image->image=$image->image;
+                $Image->index=$index;
+                $Image->save(); 
+
+                //delete image
+                if(\File::exists(public_path('/admins/uploads/tmp/'.$image->image)))                
+                    {
+                        \File::move(public_path('/admins/uploads/tmp/'.$image->image),public_path('/admins/uploads/thumbnails/'.$image->image));
+                        // \File::delete(public_path('/admins/uploads/tmp/'.$image->image));
+                    }
+                    //delete image from data base
+                    $image->delete();
         }
+        // if($request->file('files'))
+        // {
+        //     $images=$request->file('files');
+        //     // dispatch(new RealeEstateImageUploader($files,$reale_estate->id));
+        //     foreach ($images as $index => $image) {
+        //         //dd($image,$reale_estate->id);
+        //           $image_name=md5(time()).'.'.$image->getClientOriginalExtension();                  
+        //           $distinationPath=public_path('/admins/uploads/thumbnails');                  
+        //           // $getrealepath=$image->getRealPath();
+                  
+        //         $resize_image=Image::make($image->getRealPath());
+        //         $resize_image->resize(600,600,function($constraint){
+        //             $constraint->aspectRatio();
+        //         })->save($distinationPath.'/'.$image_name);
+
+        //         //$distinationPath=public_path('/admins/uploads/images');
+        //         //$image->move($distinationPath,$image_name);
+                
+        //         //insert image name to images tables
+        //         $Image=new Images;
+        //         $Image->reale_estate_id=$reale_estate->id;
+        //         $Image->image=$image_name;
+        //         $Image->index=$index;
+        //         $Image->save();
+        //     }
+        // }
         /*::::::::::::::::::::::::::::::::::::
        Notificate Admin About This Reale Estate
         :::::::::::::::::::::::::::::::::::::*/
@@ -212,7 +239,7 @@ class RealEstateController extends Controller
         $note->save();
         //update the rdirectecting link        
         $up_note=AdminNotification::find($note->id);
-        $up_note->link=url('/admin/detailes/reale-estate/'.$reale_estate->id.'/'.$note->id.'');
+        $up_note->link=route('admin.reale_estate.notification.detailes',[$reale_estate->id,$note->id]);
         $up_note->update();
         //send email notification
         $note_data=[

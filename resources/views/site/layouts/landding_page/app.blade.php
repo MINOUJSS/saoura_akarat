@@ -11,6 +11,8 @@
   <link href="{{ asset('/sites/landing_page/css/bootstrap.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/sites/landing_page/css/coming-sssoon.css') }}" rel="stylesheet" /> 
   <link href="{{ asset('/sites/landing_page/css/style.css') }}" rel="stylesheet" />    
+  <!-- filrpound  css-->
+  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -107,5 +109,45 @@
    <script src="{{asset('/sites/landing_page/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
    <script src="{{asset('/sites/landing_page/js/bootstrap.min.js')}}" type="text/javascript"></script>
    <script src="{{asset('/sites/landing_page/js/my_functions.js')}}" type="text/javascript"></script>
+    <!-- filrpound  js-->
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
+    <script>
+
+      // Get a reference to the file input element
+      const inputElement = document.querySelector('input[id="files"]');
+      // Create a FilePond instance
+      const pond = FilePond.create(inputElement);
+      //
+      FilePond.setOptions({
+        server:{
+          url:'/tmp_upload',
+          headers:{
+            'X-CSRF-TOKEN':'{{ csrf_token() }}'
+          }
+        },
+        labelIdle:'اسحب الملفات وأفلتها أو <span class="filepond--label-action"> إعرض </span>',
+        labelFileProcessingError:'خطأ أثناء التحميل',
+        labelFileLoading:'جار التحميل',
+        labelFileProcessing:'تحميل',
+        labelInvalidField:'يحتوي الحقل على ملفات غير صالحة',
+        labelFileWaitingForSize:'في انتظار الحجم',
+        labelFileSizeNotAvailable:'الحجم غير متوفر',
+        labelFileProcessingComplete:'اكتمل التحميل',
+        labelFileProcessingAborted:'تم إلغاء التحميل',
+        labelFileProcessingRevertError:'خطأ أثناء التراجع',
+        labelFileRemoveError:'خطأ أثناء الإزالة',
+        labelTapToCancel:'انقر للإلغاء',
+        labelTapToRetry:'إضغط لإعادة المحاولة',
+        labelTapToUndo:'انقر للتراجع',
+        labelButtonRemoveItem:'إزالة',
+        labelButtonAbortItemLoad:'إحباط',
+        labelButtonRetryItemLoad:'أعد المحاولة',
+        labelButtonAbortItemProcessing:'إلغاء',
+        labelButtonUndoItemProcessing:'الغاء التحميل',
+        labelButtonRetryItemProcessing:'أعد المحاولة',
+        labelButtonProcessItem :'تحميل'  
+      });
+    </script>
+    
 </html>

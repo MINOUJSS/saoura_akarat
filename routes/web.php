@@ -108,6 +108,18 @@ Route::prefix('admin')->group(function(){
     Route::post('/operations/edit','Admin\OperationsController@edit')->name('admin.operation.edit');
     Route::post('/operations/update','Admin\OperationsController@update')->name('admin.operation.update');
     Route::post('/operations/destroy/{id}','Admin\OperationsController@destroy')->name('admin.operation.destroy');
+    //---------Reservation Route
+    Route::get('/reservations','Admin\ReservationController@index')->name('admin.reservations.index');;
+    Route::post('/reservation/free-reservation/create','Admin\ReservationController@create_free_reservation')->name('admin.free.reservation.create');
+    Route::post('/reservation/free-reservation/store','Admin\ReservationController@store_free_reservation')->name('admin.free.reservation.store');
+    Route::post('/reservation/free-reservation/edit','Admin\ReservationController@edit_free_reservation')->name('admin.free.reservation.edit');
+    Route::post('/reservation/free-reservation/update','Admin\ReservationController@update_free_reservation')->name('admin.free.reservation.update');
+    Route::post('/reservation/free-reservation/destroy/{id}','Admin\ReservationController@destroy_free_reservation')->name('admin.free.reservation.destroy');
+    Route::post('/reservation/paied-reservation/create','Admin\ReservationController@create_paied_reservation')->name('admin.paied.reservation.create');
+    Route::post('/reservation/paied-reservation/store','Admin\ReservationController@store_paied_reservation')->name('admin.paied.reservation.store');
+    Route::post('/reservation/paied-reservation/edit','Admin\ReservationController@edit_paied_reservation')->name('admin.paied.reservation.edit');
+    Route::post('/reservation/paied-reservation/update','Admin\ReservationController@update_paied_reservation')->name('admin.paied.reservation.update');
+    Route::post('/reservation/paied-reservation/destroy/{id}','Admin\ReservationController@destroy_paied_reservation')->name('admin.paied.reservation.destroy');
 });
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -122,6 +134,7 @@ Route::get('/Landing_page','Site\Landing_page\LandingPageController@index')->nam
 //register_real estate rout
 Route::get('/Landing_page/register-real-estate','Site\Landing_page\RealEstateController@register')->name('site-landing-page-register-real-estate');
 Route::post('/Landing_page/store-real-estate','Site\Landing_page\RealEstateController@store')->name('site-landing-page-store-real-estate');
+Route::post('/tmp_upload','Site\Landing_page\TmpUploadController@upload');
 //register customer
 Route::get('/Landing_page/register-real-estate-customer','Site\Landing_page\RealEstateCustomerController@register')->name('site-landing-page-register-real-estate-customer');
 Route::post('/Landing_page/store-real-estate-customer','Site\Landing_page\RealEstateCustomerController@store')->name('site-landing-page-store-real-estate-customer');
