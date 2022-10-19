@@ -13,7 +13,7 @@ class TmpUploadController extends Controller
     {
         //check if the tmp folder is full
         // $tmp_images=TmpImages::all();
-        // if($tmp_images->count()>0)
+        // if($tmp_images->count()>0 && $i==0)
         // {
         //     foreach($tmp_images as $image)
         //     {
@@ -32,7 +32,7 @@ class TmpUploadController extends Controller
             $images=$request->file('files');
             // dispatch(new RealeEstateImageUploader($files,$reale_estate->id));
             foreach ($images as $index => $image) {
-                $image_name=md5(time()).'.'.$image->getClientOriginalExtension();                  
+                $image_name=uniqid().'_'.md5(time()).'.'.$image->getClientOriginalExtension();                  
                 $distinationPath=public_path('/admins/uploads/tmp');                  
                 // $getrealepath=$image->getRealPath();
                 

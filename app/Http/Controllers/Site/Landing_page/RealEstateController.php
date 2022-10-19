@@ -98,7 +98,7 @@ class RealEstateController extends Controller
             'tronsaction'=>new ValidSelectBox,
             'wilaya'=>new ValidSelectBox,
             'price'=>'required',
-            // 'files'=>'required',
+            'files'=>'required',
             // 'files.*'=>'image|mimes:jpeg,png,jpg,gif,bmp,svg|max:2000000',
             'contra' =>'required'
         ]);
@@ -162,7 +162,7 @@ class RealEstateController extends Controller
         $tmp_images=TmpImages::all();
         foreach($tmp_images as $index=>$image)
         {
-            //         //insert image name to images tables
+                 //insert image name to images tables
                 $Image=new Images;
                 $Image->reale_estate_id=$reale_estate->id;
                 $Image->image=$image->image;

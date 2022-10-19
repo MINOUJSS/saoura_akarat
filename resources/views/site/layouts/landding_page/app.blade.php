@@ -11,7 +11,7 @@
   <link href="{{ asset('/sites/landing_page/css/bootstrap.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/sites/landing_page/css/coming-sssoon.css') }}" rel="stylesheet" /> 
   <link href="{{ asset('/sites/landing_page/css/style.css') }}" rel="stylesheet" />    
-  <!-- filrpound  css-->
+  <!-- filepound  css-->
   <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 
     <!--     Fonts     -->
@@ -109,15 +109,24 @@
    <script src="{{asset('/sites/landing_page/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
    <script src="{{asset('/sites/landing_page/js/bootstrap.min.js')}}" type="text/javascript"></script>
    <script src="{{asset('/sites/landing_page/js/my_functions.js')}}" type="text/javascript"></script>
-    <!-- filrpound  js-->
+    <!-- filepound  js-->
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
     <script>
-
+      // Register the plugin
+    FilePond.registerPlugin(FilePondPluginFileValidateType);
       // Get a reference to the file input element
       const inputElement = document.querySelector('input[id="files"]');
       // Create a FilePond instance
-      const pond = FilePond.create(inputElement);
+      const pond = FilePond.create(inputElement, {
+        acceptedFileTypes:['image/*'],
+    fileValidateTypeDetectType: (source, type) =>
+        new Promise((resolve, reject) => {
+            // Do custom type detection here and return with promise
+            resolve(type);
+        }),
+});
       //
       FilePond.setOptions({
         server:{
