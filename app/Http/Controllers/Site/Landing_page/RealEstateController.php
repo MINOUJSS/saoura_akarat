@@ -28,11 +28,22 @@ use App\TmpImages;
 use App\AdminNotification;
 use Image;
 use App\Rules\ValidSelectBox;
+use DateTime;
 
 class RealEstateController extends Controller
 {
-    public function register()
+    public function register(Request $request)
     {
+        // $now=new DateTime('2022-10-25 19:45:00');
+        // //dd($now);
+        // //$now='2022-10-25 17:45:00';
+        // $exp_date=new DateTime('2022-10-25 16:45:00');
+        // $interval=$now->diff($exp_date);
+        // $dif_date = $interval->format('%i'); 
+        // dd($dif_date);
+        //add session
+        $request->session()->put('session_id',uniqid().'-'.md5(time()));
+        //
         $tronsaction=Tronsaction::all();
         $reale_estate_types=RealeEstateType::all();
         $wilayas=Wilaya::all();
@@ -159,7 +170,7 @@ class RealEstateController extends Controller
         :::::::::::::::::::::::::::::::::::*/
 
         //get tmp images of this reale estate
-        $tmp_images=TmpImages::all();
+        $tmp_images=TmpImages::where('session_id',$request->session()->get('session_id'))->get();
         foreach($tmp_images as $index=>$image)
         {
                  //insert image name to images tables
@@ -259,6 +270,9 @@ class RealEstateController extends Controller
                    return back() with success
         :::::::::::::::::::::::::::::::::::*/
         Alert::success('تم حفظ العقار بنجاح', 'تم إضافة العقار بنجاح , ستقوم إدارة الساورة للعقارات بالإتصال بك خلال الـ 24 ساعة القادمة إن شاء الله.');
+        
+        //destroy session
+        $request->session()->forget('session_id');
         //return redirect()->back()->with('success','تم إضافة العقار بنجاح , ستقوم إدارة الساورة للعقارات بالإتصال بك خلال الـ 24 ساعة القادمة إن شاء الله.');
         return view('site.landding_page.register_real_estate.thank_you');        
     }  

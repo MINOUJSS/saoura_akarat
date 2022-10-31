@@ -12,6 +12,8 @@ use App\Operation;
 use App\OrderToFindRealeEstate; 
 use App\RealEestate;
 use App\AdminNotification;
+use App\TmpImages;
+use DateTime;
 
 class Kernel extends ConsoleKernel
 {
@@ -78,6 +80,29 @@ class Kernel extends ConsoleKernel
             }
         }    
     })->daily()->runInBackground();
+       // مسح الصور الموقتة التي تعدى وقت إضافتها ساعة
+       $schedule->call(function(){
+        //select all images who are register one houer from now
+        $images=TmpImages::all();
+        //deleted from folder
+        foreach($images as $image){
+            //verify diff of date
+        $now=new DateTime();
+        $image_date=new DateTime($image->created_at);
+        $interval=$now->diff($image_date);
+        $dif_day = $interval->format('%d'); 
+        $dif_hour = $interval->format('%h');
+        $dif_minut = $interval->format('%i');  
+        if($dif_day>=0 && $dif_hour>=0 && $dif_minut>=2 && \File::exists(public_path('/admins/uploads/tmp/'.$image->image)))                
+                    {
+                        \File::move(public_path('/admins/uploads/tmp/'.$image->image),public_path('/admins/uploads/thumbnails/'.$image->image));
+                        // \File::delete(public_path('/admins/uploads/tmp/'.$image->image));
+                    //delete image from data base
+                    $image->delete();
+                    }
+                    
+                }
+       })->everyMinute()->runInBackground();
         // مراقبة الحجز المؤقت للعقارات 
 
         // مراقبة الحجز بعربون

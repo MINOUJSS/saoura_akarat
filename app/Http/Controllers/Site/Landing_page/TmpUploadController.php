@@ -44,6 +44,7 @@ class TmpUploadController extends Controller
                 //insert image name to tmp images tables
                 $Image=new TmpImages;
                 $Image->image=$image_name;
+                $Image->session_id=$request->session()->get('session_id');
                 $Image->index=$index;
                 $Image->save();
         
