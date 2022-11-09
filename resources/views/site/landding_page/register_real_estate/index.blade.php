@@ -31,6 +31,7 @@
                 <div class="col-md-6 col-md-offset-3 col-sm6-6 col-sm-offset-3 ">
                     <form id="r_e_form" class="form-inline" role="form" action="{{route('site-landing-page-store-real-estate')}}" method="POST" enctype="multipart/form-data">
                       @csrf
+                      <input type="hidden" name="session_id" value="{{$session_id}}">
                       <h4 style="color:#ffffff">1)- معلوماتك الشخصية</h4>
                       <div class="form-group {{$errors->has('name')? 'has-error':''}}"  style="margin:5px;">
                         <label class="sr-only" for="name">الإسم</label>

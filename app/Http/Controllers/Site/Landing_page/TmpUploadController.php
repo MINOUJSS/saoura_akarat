@@ -10,22 +10,7 @@ use App\TmpImages;
 class TmpUploadController extends Controller
 {
     public function upload(Request $request)
-    {
-        //check if the tmp folder is full
-        // $tmp_images=TmpImages::all();
-        // if($tmp_images->count()>0 && $i==0)
-        // {
-        //     foreach($tmp_images as $image)
-        //     {
-        //         //delete image from folder 
-        //         if(\File::exists(public_path('/admins/uploads/tmp/'.$image->image)))
-        //             {
-        //                 \File::delete(public_path('/admins/uploads/tmp/'.$image->image));
-        //             }
-        //         //delete from database
-        //         $image->delete();
-        //     }
-        // }
+    {        
         //check if has file
         if($request->hasfile('files'))
         {
@@ -49,7 +34,25 @@ class TmpUploadController extends Controller
                 $Image->save();
         
             }
+            return $image_name;
         }
         return '';
+    }
+
+    public function destroy()
+    {
+        $image=TmpImages::where('image',request()->getContent())->first();
+        if($image)
+        {
+            //delete image from folder
+            if(\File::exists(public_path('/admins/uploads/tmp/'.$image->image)))                
+                    {
+                        \File::move(public_path('/admins/uploads/tmp/'.$image->image),public_path('/admins/uploads/thumbnails/'.$image->image));
+                        // \File::delete(public_path('/admins/uploads/tmp/'.$image->image));
+                    //delete image from data base
+                    $image->delete();
+                    }
+            return response('');
+        }
     }
 }

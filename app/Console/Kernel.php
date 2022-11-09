@@ -93,7 +93,7 @@ class Kernel extends ConsoleKernel
         $dif_day = $interval->format('%d'); 
         $dif_hour = $interval->format('%h');
         $dif_minut = $interval->format('%i');  
-        if($dif_day>=0 && $dif_hour>=0 && $dif_minut>=2 && \File::exists(public_path('/admins/uploads/tmp/'.$image->image)))                
+        if($dif_day>=0 && $dif_hour>=0 && $dif_minut>=30 && \File::exists(public_path('/admins/uploads/tmp/'.$image->image)))                
                     {
                         \File::move(public_path('/admins/uploads/tmp/'.$image->image),public_path('/admins/uploads/thumbnails/'.$image->image));
                         // \File::delete(public_path('/admins/uploads/tmp/'.$image->image));
@@ -102,7 +102,7 @@ class Kernel extends ConsoleKernel
                     }
                     
                 }
-       })->everyMinute()->runInBackground();
+       })->everyFiveMinutes()->runInBackground();
         // مراقبة الحجز المؤقت للعقارات 
 
         // مراقبة الحجز بعربون

@@ -38,9 +38,10 @@ class Clear_Tmp_Images_evry_day implements ShouldQueue
                     {
                         \File::move(public_path('/admins/uploads/tmp/'.$image->image),public_path('/admins/uploads/thumbnails/'.$image->image));
                         // \File::delete(public_path('/admins/uploads/tmp/'.$image->image));
-                    }
                     //delete image from data base
                     $image->delete();
+                    }
+                    
                 }
         //deleted from database
 

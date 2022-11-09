@@ -130,7 +130,8 @@
       //
       FilePond.setOptions({
         server:{
-          url:'/tmp_upload',
+          process:'/tmp_upload',
+          revert:'/tmp_delete',
           headers:{
             'X-CSRF-TOKEN':'{{ csrf_token() }}'
           }
@@ -157,6 +158,7 @@
         labelButtonRetryItemProcessing:'أعد المحاولة',
         labelButtonProcessItem :'تحميل'  
       });
+      //console.log('hi');
     </script>
     
 </html>

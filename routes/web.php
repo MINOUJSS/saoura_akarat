@@ -135,6 +135,7 @@ Route::get('/Landing_page','Site\Landing_page\LandingPageController@index')->nam
 Route::get('/Landing_page/register-real-estate','Site\Landing_page\RealEstateController@register')->name('site-landing-page-register-real-estate');
 Route::post('/Landing_page/store-real-estate','Site\Landing_page\RealEstateController@store')->name('site-landing-page-store-real-estate');
 Route::post('/tmp_upload','Site\Landing_page\TmpUploadController@upload');
+Route::delete('/tmp_delete','Site\Landing_page\TmpUploadController@destroy');
 //register customer
 Route::get('/Landing_page/register-real-estate-customer','Site\Landing_page\RealEstateCustomerController@register')->name('site-landing-page-register-real-estate-customer');
 Route::post('/Landing_page/store-real-estate-customer','Site\Landing_page\RealEstateCustomerController@store')->name('site-landing-page-store-real-estate-customer');

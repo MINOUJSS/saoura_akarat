@@ -34,15 +34,9 @@ class RealEstateController extends Controller
 {
     public function register(Request $request)
     {
-        // $now=new DateTime('2022-10-25 19:45:00');
-        // //dd($now);
-        // //$now='2022-10-25 17:45:00';
-        // $exp_date=new DateTime('2022-10-25 16:45:00');
-        // $interval=$now->diff($exp_date);
-        // $dif_date = $interval->format('%i'); 
-        // dd($dif_date);
         //add session
         $request->session()->put('session_id',uniqid().'-'.md5(time()));
+        $session_id=$request->session()->get('session_id');
         //
         $tronsaction=Tronsaction::all();
         $reale_estate_types=RealeEstateType::all();
@@ -55,7 +49,7 @@ class RealEstateController extends Controller
         $properties=Property::all();
         $etage_numbers=EtageNumber::all();
 
-        return view('site.landding_page.register_real_estate.index',compact('tronsaction','reale_estate_types','wilayas','rooms','etages','furnisheds','facads','bathes','properties','etage_numbers'));
+        return view('site.landding_page.register_real_estate.index',compact('session_id','tronsaction','reale_estate_types','wilayas','rooms','etages','furnisheds','facads','bathes','properties','etage_numbers'));
     }
 
     public function store(Request $request)
