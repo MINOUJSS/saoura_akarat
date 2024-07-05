@@ -1,5 +1,5 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 class Contra_Table_Seeder extends Seeder

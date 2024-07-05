@@ -1,9 +1,9 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RealeEstate_Type_Table_Seeder extends Seeder
+class Rooms_Table_Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,38 +12,33 @@ class RealeEstate_Type_Table_Seeder extends Seeder
      */
     public function run()
     {
-        DB::table('reale_estate_types')->insert([
-            'type' =>'شقة',
+        DB::table('rooms')->insert([
+            'rooms' =>'F1',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('reale_estate_types')->insert([
-            'type' =>'منزل',
+        DB::table('rooms')->insert([
+            'rooms' =>'F2',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('reale_estate_types')->insert([
-            'type' =>'ستيديو',
+        DB::table('rooms')->insert([
+            'rooms' =>'F3',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('reale_estate_types')->insert([
-            'type' =>'مزرعة',
+        DB::table('rooms')->insert([
+            'rooms' =>'F4',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('reale_estate_types')->insert([
-            'type' =>'أرض',
+        DB::table('rooms')->insert([
+            'rooms' =>'F5',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('reale_estate_types')->insert([
-            'type' =>'محل',
-            'created_at'=>date('Y-m-d h:i:s'),
-            'updated_at'=>date('Y-m-d h:i:s')
-        ]);
-        DB::table('reale_estate_types')->insert([
-            'type' =>'مكتب',
+        DB::table('rooms')->insert([
+            'rooms' =>'+F5',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);

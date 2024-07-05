@@ -1,5 +1,5 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 class Add_Facke_image_to_Reale_Estate_Table_Seeder extends Seeder

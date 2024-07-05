@@ -1,9 +1,9 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class Rooms_Table_Seeder extends Seeder
+class Bathes_Table_Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,33 +12,33 @@ class Rooms_Table_Seeder extends Seeder
      */
     public function run()
     {
-        DB::table('rooms')->insert([
-            'rooms' =>'F1',
+        DB::table('bathes')->insert([
+            'bathes' =>'1',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('rooms')->insert([
-            'rooms' =>'F2',
+        DB::table('bathes')->insert([
+            'bathes' =>'2',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('rooms')->insert([
-            'rooms' =>'F3',
+        DB::table('bathes')->insert([
+            'bathes' =>'3',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('rooms')->insert([
-            'rooms' =>'F4',
+        DB::table('bathes')->insert([
+            'bathes' =>'4',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('rooms')->insert([
-            'rooms' =>'F5',
+        DB::table('bathes')->insert([
+            'bathes' =>'5',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);
-        DB::table('rooms')->insert([
-            'rooms' =>'+F5',
+        DB::table('bathes')->insert([
+            'bathes' =>'+5',
             'created_at'=>date('Y-m-d h:i:s'),
             'updated_at'=>date('Y-m-d h:i:s')
         ]);

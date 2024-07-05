@@ -1,5 +1,5 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Dayra;
 class Dayra_Table_Seeder extends Seeder

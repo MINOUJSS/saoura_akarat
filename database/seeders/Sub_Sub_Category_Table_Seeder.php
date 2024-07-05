@@ -1,9 +1,9 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
-use App\SubCategory;
+use App\SubSubCategory;
 
-class Sub_Category_Table_Seeder extends Seeder
+class Sub_Sub_Category_Table_Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,10 +12,10 @@ class Sub_Category_Table_Seeder extends Seeder
      */
     public function run()
     {
-        $sub_category=SubCategory::create([
+        $sub_sub_category=SubSubCategory::create([
             'ar_name'=>'بدون تصنيف',
             'ar_slug'=>'بدون-تصنيف',
-            'category_id'=>1,
+            'sub_category_id'=>1,
             'icon'=>'/'
         ]);
     }
