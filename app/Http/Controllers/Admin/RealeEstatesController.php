@@ -22,6 +22,7 @@ use App\Bathes;
 use App\Property;
 use App\EtageNumber;
 use App\AdminNotification;
+use App\Operation;
 use Image;
 use Auth;
 
@@ -417,6 +418,16 @@ class RealeEstatesController extends Controller
         Alert::success('تم حدف العقار بنجاح');
         return redirect(route('admin.reale_estates'));
     }
+    // public  function show_annuler_form(Request $request)
+    // {
+    //     //get reale estate data
+    //     $real_estate="";
+    //     //get order to find data
+    //     $order_to_find="";
+    //     //return the view of form with  reale estate and order data
+    //     return 'view';
+    // }
+   
 
     public function apartments()
     {

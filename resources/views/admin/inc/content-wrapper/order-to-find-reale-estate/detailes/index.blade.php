@@ -54,7 +54,7 @@
               <tr>
                 <td>{{$index+1}}</td>
                 <td>{{$item->id}}</td>
-                <td><a href="{{route('admin.reale_estate.order.to.find.detailes',$item->id)}}">{{$item->name}}</a></td>
+                <td><a href="{{route('admin.reale_estate.detailes',$item->id)}}">{{$item->name}}</a></td>
                 <td>{{$item->phone}}</td>
                 <td>{{$item->type}}</td>
                 <td>@if($item->rooms==null){{"/"}}@else{{$item->rooms}}@endif</td>

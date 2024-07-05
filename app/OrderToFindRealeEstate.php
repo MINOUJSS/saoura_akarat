@@ -10,4 +10,5 @@ class OrderToFindRealeEstate extends Model
     {
         return $this->HasOne('App\Operation','order_id');
     }
+ 
 }

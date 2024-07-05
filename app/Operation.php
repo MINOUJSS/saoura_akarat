@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Operation extends Model
 {
+    public function invoice()
+    {
+        return $this->hasOne('App\Invoice');
+    }
+
     public function Order()
     {
         return $this->belongsTo('App\OrderToFindRealeEstate','order_id');

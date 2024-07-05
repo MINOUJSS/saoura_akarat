@@ -44,7 +44,7 @@ Route::prefix('admin')->group(function(){
     //notification detailes
     Route::get('/detailes/reale-estate/{id}/{note_id}','Admin\RealeEstatesController@notification_detailes')->name('admin.reale_estate.notification.detailes');
     //delete
-    Route::delete('/delete/reale-estate/{id}','Admin\RealeEstatesController@destroy')->name('admin.reale_estate.destroy');
+    Route::delete('/delete/reale-estate/{id}','Admin\RealeEstatesController@destroy')->name('admin.reale_estate.destroy');    
     //edit
     Route::get('/edit/reale-estate/{id}','Admin\RealeEstatesController@edit')->name('admin.reale_estate.edit');
     //update
@@ -108,6 +108,8 @@ Route::prefix('admin')->group(function(){
     Route::post('/operations/edit','Admin\OperationsController@edit')->name('admin.operation.edit');
     Route::post('/operations/update','Admin\OperationsController@update')->name('admin.operation.update');
     Route::post('/operations/destroy/{id}','Admin\OperationsController@destroy')->name('admin.operation.destroy');
+    Route::post('/operations/anuuler_view','Admin\OperationsController@annuler_view')->name('admin.operation.annuler_view');
+    Route::post('/operations/anuuler','Admin\OperationsController@annuler')->name('admin.operation.annuler');
     //---------Reservation Route
     Route::get('/reservations','Admin\ReservationController@index')->name('admin.reservations.index');;
     Route::post('/reservation/free-reservation/create','Admin\ReservationController@create_free_reservation')->name('admin.free.reservation.create');

@@ -10,6 +10,8 @@ use App\OrderToFindRealeEstate;
 use App\Operation;
 use App\Invoice;
 use App\AdminNotification;
+use App\OrderToFindTrace;
+use App\OperationsTrace;
 use Auth;
 
 class OperationsController extends Controller
@@ -297,5 +299,65 @@ class OperationsController extends Controller
         return redirect(route('admin.reale_estate.all.orders.to.find'));
 
     }
+    //
+    public function annuler_view(Request $request)
+    {  
+        //dd($request);      
+        //get operation
+        $operation=Operation::where('reale_estate_id',$request->reale_estate_id)->first();
+        $reale_estate=RealEestate::findOrfail($operation->reale_estate_id);
+        $order_to_find_r_e=OrderToFindRealeEstate::findOrfail($operation->order_id);       
+        //return annuler view with  operation data
+        return view('admin.operations.annuler.index',compact('operation','reale_estate','order_to_find_r_e'));
+
+    }
+
+    public function annuler(Request $request)
+    {
+        // dd($request);
+        //get order_id of this operation
+        $operation=Operation::findOrFail($request->operation_id);
+        $order=OrderToFindRealeEstate::findOrFail($request->order_id);
+        //return reale estate status to 0
+        $reale_estate=RealEestate::findOrfail($request->r_e_id);
+        $reale_estate->statu=0;
+        $reale_estate->update();
+        //insert this operation to Order trace
+        $order_trace=new OrderToFindTrace;
+        $order_trace->name=$order->name;
+        $order_trace->phone=$order->phone;
+        $order_trace->type=$order->type;      
+        $order_trace->rooms=$order->rooms;
+        $order_trace->baths=$order->baths;
+        $order_trace->etages=$order->etages;
+        $order_trace->furnished=$order->furnished;
+        $order_trace->property=$order->property;
+        $order_trace->facad=$order->facad;
+        $order_trace->etage_number=$order->etage_number;      
+        $order_trace->transaction=$order->transaction;
+        $order_trace->wilaya=$order->wilaya;
+        $order_trace->dayra=$order->dayra;
+        $order_trace->description=$order->description;
+        $order_trace->save();         
+        //insert this operation to Operation trace 
+        $operation_trace=new OperationsTrace;
+        $operation_trace->reale_estate_id=$operation->reale_estate_id;
+        $operation_trace->order_id=$order_trace->id;    
+        $operation_trace->transaction=$operation->transaction;       
+        $operation_trace->exp_date=$operation->exp_date;
+        $operation_trace->reale_estate_type=$reale_estate->type;
+        $operation_trace->price=$operation->invoice->price;
+        $operation_trace->tax=$operation->invoice->tax;
+        $operation_trace->save();                                   
+        //delete this operation
+        $operation->delete();
+        //delete this order
+        $order->delete();
+        //alert saccess
+        Alert::success('تم تحرير العقار و جذف الطلب بنجاح');
+        //return back
+        return redirect(route('admin.reale_estate.detailes',$reale_estate->id));
+
+    } 
     
 }

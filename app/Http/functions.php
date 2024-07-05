@@ -539,6 +539,12 @@ function order_to_find_has_operation($id)
     }
 }
 //
+function get_reale_estate_statu_code($id)
+{
+    $reale_estate=App\RealEestate::findOrFail($id);
+    return $reale_estate->statu;
+}
+//
 function print_reale_estate_statu($id)
 {
  $reale_estate=App\RealEestate::findOrFail($id);

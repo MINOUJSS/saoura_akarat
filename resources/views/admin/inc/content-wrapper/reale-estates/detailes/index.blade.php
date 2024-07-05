@@ -68,12 +68,17 @@
           <table class="table">
             <tr>
               <td>عمليات على العقار</td>
-              <td> 
+              <td>           
+                {{-- annuler form --}}
+                <form id="annuler-{{$reale_estate->id}}" action="{{route('admin.operation.annuler_view')}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="reale_estate_id" value="{{$reale_estate->id}}">
+                  </form>
                 {{-- edite form --}}
                 <form id="edit-{{$reale_estate->id}}"action="{{route('admin.reale_estate.edit',$reale_estate->id)}}" method="GET">                    
                   @csrf
                   @method('GET')
-                  </form>
+                  </form>                  
                   {{-- delete form --}}
                   <form id="delete-{{$reale_estate->id}}" action="{{route('admin.reale_estate.destroy',$reale_estate->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -84,9 +89,12 @@
                   {{-- edit reale estate images --}}
                   <a href="{{route('admin.reale_estate.edit-reale-estate-images',$reale_estate->id)}}" class="btn btn-primary"><i class="fa fa-image"> تعديل  صور العقار</i></a>
                   {{-- delete btn --}}
-                  <button onclick="event.preventDefault();if(confirm('هل تريد فعلا حدف هذا العقار؟'))document.getElementById('delete-{{$reale_estate->id}}').submit();" type="submit" class="btn btn-danger"><i class="fa fa-trash"> حذف</i></button>
-
-              </td>
+                  <button onclick="event.preventDefault();if(confirm('هل تريد فعلا حدف هذا العقار؟'))document.getElementById('delete-{{$reale_estate->id}}').submit();" type="submit" class="btn btn-danger"><i class="fa fa-trash"> حذف العقار</i></button>
+                  @if(reale_estate_has_operation($reale_estate->id) && get_reale_estate_statu_code($reale_estate->id)==3)  
+                  {{-- annuler btn --}}
+                  <button onclick="event.preventDefault();if(confirm('هل تريد فعلا تحرير هذا العقار؟'))document.getElementById('annuler-{{$reale_estate->id}}').submit();" type="submit" class="btn btn-warning"><i class="fa fa-cut"> تحرير العقار</i></button>
+                  @endif
+                </td>
             </tr>
             <tr>
               <td>إسم صاحب العقار</td>
@@ -232,7 +240,7 @@
                 <td>
                   <span class="label label-warning">قيد اللإنتظار</span>
                 </td>
-                <td style="display:inline-flex;>
+                <td style="display:inline-flex;">
                   {{-- <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="order_id" value="{{$ordertofind->id}}">
@@ -355,7 +363,7 @@
                 <td>
                   <span class="label label-warning">قيد اللإنتظار</span>
                 </td>
-                <td style="display:inline-flex;>
+                <td style="display:inline-flex;">
                   <form id="add_to_liked_list_{{$item->id}}" action="{{route('admin.add.to.liked.list')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="order_id" value="{{$item->id}}">
